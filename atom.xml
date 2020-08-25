@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chaosreigned.github.io</id>
     <title>Chaos</title>
-    <updated>2020-08-25T09:48:35.430Z</updated>
+    <updated>2020-08-25T10:03:19.286Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chaosreigned.github.io"/>
     <link rel="self" href="https://chaosreigned.github.io/atom.xml"/>
@@ -10,6 +10,67 @@
     <logo>https://chaosreigned.github.io/images/avatar.png</logo>
     <icon>https://chaosreigned.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Chaos</rights>
+    <entry>
+        <title type="html"><![CDATA[SQL库函数]]></title>
+        <id>https://chaosreigned.github.io/post/sql-ku-han-shu/</id>
+        <link href="https://chaosreigned.github.io/post/sql-ku-han-shu/">
+        </link>
+        <updated>2020-08-25T10:02:02.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="rank函数">rank函数</h3>
+<ol>
+<li>rank()       是跳跃拍学，两个第二名下来就是第四名</li>
+<li>dense_rank()   是连续排序，两个第二名仍然跟着第三名</li>
+</ol>
+<ul>
+<li>语法：<br>
+Select rank() over(order by xxx [desc]) from Table</li>
+</ul>
+<h3 id="round-函数">round 函数</h3>
+<p>用于把数值字段舍入为指定的小数位数</p>
+<ul>
+<li>语法：<br>
+SELECT ROUND(column_name,decimals) FROM table_name</li>
+</ul>
+<h3 id="datediffab">datediff(A,B)</h3>
+<p>日期A和B之间差的天数</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[总线删除设备]]></title>
+        <id>https://chaosreigned.github.io/post/zong-xian-shan-chu-she-bei/</id>
+        <link href="https://chaosreigned.github.io/post/zong-xian-shan-chu-she-bei/">
+        </link>
+        <updated>2020-08-25T09:50:22.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="scsi">scsi：</h3>
+<ul>
+<li>删除：
+<ol>
+<li>lsscsi | grep xxx</li>
+<li>echo 1 &gt; /sys/bus/scsi/devices/xxx/delete</li>
+</ol>
+</li>
+<li>恢复：
+<ol>
+<li>echo &quot;- - -&quot; &gt; /sys/class/scsi_host/hostx/scan  //x循环遍历0-n</li>
+</ol>
+</li>
+</ul>
+<h3 id="pci">pci：</h3>
+<ul>
+<li>删除：
+<ol>
+<li>lspci | grep xxx</li>
+<li>echo 1 &gt; /sys/bus/pci/devices/xxx/remove</li>
+</ol>
+</li>
+<li>恢复：
+<ol>
+<li>echo 1 &gt; /sys/bus/pci/rescan</li>
+</ol>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Knuth 洗牌算法]]></title>
         <id>https://chaosreigned.github.io/post/knuth-xi-pai-suan-fa/</id>
@@ -305,74 +366,6 @@ private int updateDP(List&lt;Integer&gt;[] res, int val, int len) {
 该异常在客户端和服务器均有可能发生。在第5个异常的第一种情况中（也就是抛出SocketExcepton:Connect reset by peer:Socket write error后），如果再继续写数据则抛出该异常。<br>
 前两个异常的解决方法是首先确保程序退出前关闭所有的网络连接，其次是要检测对方的关闭连接操作，发现对方关闭连接后自己也要关闭该连接。</p>
 </li>
-</ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[sed命令]]></title>
-        <id>https://chaosreigned.github.io/post/sed-ming-ling/</id>
-        <link href="https://chaosreigned.github.io/post/sed-ming-ling/">
-        </link>
-        <updated>2020-08-25T03:37:52.000Z</updated>
-        <content type="html"><![CDATA[<p>sed在处理文本时是逐行读取文件内容，读到匹配的行就根据指令做操作，不匹配就跳过</p>
-<p>-i选项：直接作用源文件，源文件将被修改。</p>
-<p>常用：<br>
-sed -i &quot;s/xxx/yyy/&quot; file</p>
-<p>打印：p命令</p>
-<p>sed ‘/abc/p’ file 打印file中包含abc的行。默认情况sed把所有行都打印到屏幕，如果某行匹配到模式，则把该行另外再打印一遍<br>
-sed  -n ‘/abc/p’ file 和上面一样，只是去掉了sed的默认行为，只会打印匹配的行</p>
-<p>删除：d命令</p>
-<p>sed ‘3,<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi mathvariant="normal">’</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal"> </mi><mi mathvariant="normal"> </mi><mi mathvariant="normal"> </mi><mi mathvariant="normal">删</mi><mi mathvariant="normal">除</mi><mi mathvariant="normal">从</mi><mi mathvariant="normal">第</mi><mn>3</mn><mi mathvariant="normal">行</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">一</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">内</mi><mi mathvariant="normal">容</mi><mi mathvariant="normal">。</mi><mi>s</mi><mi>e</mi><mi>d</mi><mi mathvariant="normal">‘</mi></mrow><annotation encoding="application/x-tex">d’ file    删除从第3行到最后一行的内容。
-sed ‘</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">d</span><span class="mord">’</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord"> </span><span class="mord"> </span><span class="mord"> </span><span class="mord cjk_fallback">删</span><span class="mord cjk_fallback">除</span><span class="mord cjk_fallback">从</span><span class="mord cjk_fallback">第</span><span class="mord">3</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">内</span><span class="mord cjk_fallback">容</span><span class="mord cjk_fallback">。</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord">‘</span></span></span></span>d’ file 删除最后一行的内容<br>
-sed ‘/abc/d’ 删除包含abc的行。<br>
-sed ‘3d’ file 删除第三行的内容</p>
-<p>替换：s命令</p>
-<p>sed  ‘s/abc/def/g’ file 把行内的所有abc替换成def，如果没有g,则只替换行内的第一个abc<br>
-sed  -n ‘s/abc/def/p’ file 只打印发生替换的那些行<br>
-sed  ‘s/abc/&amp;def/’ file 在所有的abc后面添加def（&amp;表示匹配的内容）<br>
-sed  -n ‘s/abc/def/gp’ file 把所有的abc替换成def，并打印发生替换的那些行<br>
-sed  ‘s#abc#def#g’ file 把所有的abc替换成def，跟在替换s后面的字符就是查找串和 替换串之间的分割字符，本例中试#</p>
-<p>指定行的范围：逗号</p>
-<p>sed  -n ‘/abc/,/def/p’ file 打印模式abc到def的行<br>
-sed  -n ‘5/,/def/p’ file 打印从第五行到包含def行之间的行。<br>
-sed /abd/,/def/s/aaa/bbb/g 修改从模式abc到模式def之间的行，把aaa替换成def</p>
-<p>多重编辑-e</p>
-<p>sed  -e ‘1,3d’ -e ‘s/abc/def/g’ file 删除1-3行，然后把其余行的abc替换成def</p>
-<p>读文件：r命令</p>
-<p>sed  ‘/abc/r newfile’ file 在包含abc的行后读入newfile的内容</p>
-<p>写文件：w命令</p>
-<p>sed  ‘/abc/w newfile’ file 在包含abc的行写入newfile</p>
-<p>追加：a命令</p>
-<p>sed  ‘/abc/a\def’ file 在包含abc的行后新起一行，写入def</p>
-<p>插入：i命令</p>
-<p>sed  ‘/abc/i\def’ file 在包含abc的行前新起一行，写入def</p>
-<p>修改：c命令</p>
-<p>sed  ‘/abc/c\def’ file 在包含abc的行替换成def，旧文本被覆盖</p>
-<p>读取下一行：n命令</p>
-<p>sed  ‘/abc/{n ; s/aaa/bbb/g;}’ file 读取包含abc的行的下一行，替换aaa为bbb</p>
-<p>转换：y命令</p>
-<p>sed  ‘y/abc/ABC’ file 将a替换成A，b替换成B，c替换成C（正则表达式元字符不起作用）</p>
-<p>退出：q命令</p>
-<p>sed  ‘/abc/{ s/aaa/bbb/ ;q; }’ file 在某行包含了abc，把aaa替换成bbb，然后退出sed。</p>
-<p>暂存和取用：h命令（把模式行存储到暂存缓冲区）和g（取出暂存缓冲区的行并覆盖模式缓冲区）G（取出临时缓冲区的行）命令</p>
-<p>h和g是复制行为(覆盖），H和G表示追加。<br>
-sed  -e ‘/abc/h’  -e ‘<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mi mathvariant="normal">’</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">包</mi><mi mathvariant="normal">含</mi><mi>a</mi><mi>b</mi><mi>c</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">通</mi><mi mathvariant="normal">过</mi><mi>h</mi><mi mathvariant="normal">命</mi><mi mathvariant="normal">令</mi><mi mathvariant="normal">保</mi><mi mathvariant="normal">存</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">暂</mi><mi mathvariant="normal">存</mi><mi mathvariant="normal">缓</mi><mi mathvariant="normal">冲</mi><mi mathvariant="normal">区</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">在</mi><mi mathvariant="normal">第</mi><mi mathvariant="normal">二</mi><mi mathvariant="normal">条</mi><mi mathvariant="normal">命</mi><mi mathvariant="normal">令</mi><mi mathvariant="normal">汇</mi><mi mathvariant="normal">中</mi><mi mathvariant="normal">，</mi><mi>s</mi><mi>e</mi><mi>d</mi><mi mathvariant="normal">读</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">一</mi><mi mathvariant="normal">行</mi></mrow><annotation encoding="application/x-tex">G’ file 包含abc的行通过h命令保存到暂存缓冲区，在第二条命令汇中，sed读到最后一行</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">G</span><span class="mord">’</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">包</span><span class="mord cjk_fallback">含</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">c</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">通</span><span class="mord cjk_fallback">过</span><span class="mord mathdefault">h</span><span class="mord cjk_fallback">命</span><span class="mord cjk_fallback">令</span><span class="mord cjk_fallback">保</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">暂</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">缓</span><span class="mord cjk_fallback">冲</span><span class="mord cjk_fallback">区</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">第</span><span class="mord cjk_fallback">二</span><span class="mord cjk_fallback">条</span><span class="mord cjk_fallback">命</span><span class="mord cjk_fallback">令</span><span class="mord cjk_fallback">汇</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">，</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord cjk_fallback">读</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span></span></span></span>时，G命令从暂存缓冲区中读取一行，追加到模式缓冲区的后面。即所有包含abc的行的最后一行被复制到文件末尾。<br>
-sed -e ‘/abc/{h; d;}’       -e  ‘/def/{g; }’ file 包含abc的行会移到包含def的行上，并进行覆盖。</p>
-<p>暂存和互换：h和x命令</p>
-<p>sed  -e ‘/abc/h’  -e ‘/def/x’ file 包含abc的行会被换成def的行。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[cache-control各值的理解]]></title>
-        <id>https://chaosreigned.github.io/post/cache-control-ge-zhi-de-li-jie/</id>
-        <link href="https://chaosreigned.github.io/post/cache-control-ge-zhi-de-li-jie/">
-        </link>
-        <updated>2020-08-25T03:37:06.000Z</updated>
-        <content type="html"><![CDATA[<ol>
-<li>HTTP1.1 max-age 的优先级比 Expires 高；HTTP1.0 Expires的优先级比  max-age 高；</li>
-<li>max-age，max-stale 和 min-fresh 的关系：缓存使用期 age 表示缓存自 Server 将其发出（或最后一次被服务器再验证）之后过去的时间，则如果 age + min-fresh &lt; max-age，缓存未过期；如果 age + min-fresh &gt;= max-age &amp;&amp; age + min-fresh &lt; max-age + max-stale，则虽然缓存过期了，但是缓存继续可以使用，只是在头部添加 110 警告码；如果 age + min-fresh &gt;= max-age + max-stale，则缓存过期且不可使用。</li>
-<li>no-cache 和 max-age = 0 的区别：参考（no-cache有强制性）</li>
-<li>no-cache 和 no-store 区别：no-cache 实际会进行缓存，只是在缓存响应之前会先进行一次新鲜度再验证（浏览器的 f5 刷新）；而 no-store 不会进行缓存，每次都是向获取服务器的最新数据（浏览器的强制刷新）</li>
 </ol>
 ]]></content>
     </entry>
