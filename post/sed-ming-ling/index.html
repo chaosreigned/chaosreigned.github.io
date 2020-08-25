@@ -1,0 +1,215 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sed命令 | Chaosreigned</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io/favicon.ico?v=1598327664781">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="sed命令 | Chaosreigned - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="sed在处理文本时是逐行读取文件内容，读到匹配的行就根据指令做操作，不匹配就跳过
+-i选项：直接作用源文件，源文件将被修改。
+常用：
+sed -i &quot;s/xxx/yyy/&quot; file
+打印：p命令
+sed ‘/abc/p..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io">
+  <img class="avatar" src="https://chaosreigned.github.io/images/avatar.png?v=1598327664781" alt="">
+  </a>
+  <h1 class="site-title">
+    Chaosreigned
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              sed命令
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-25
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>sed在处理文本时是逐行读取文件内容，读到匹配的行就根据指令做操作，不匹配就跳过</p>
+<p>-i选项：直接作用源文件，源文件将被修改。</p>
+<p>常用：<br>
+sed -i &quot;s/xxx/yyy/&quot; file</p>
+<p>打印：p命令</p>
+<p>sed ‘/abc/p’ file 打印file中包含abc的行。默认情况sed把所有行都打印到屏幕，如果某行匹配到模式，则把该行另外再打印一遍<br>
+sed  -n ‘/abc/p’ file 和上面一样，只是去掉了sed的默认行为，只会打印匹配的行</p>
+<p>删除：d命令</p>
+<p>sed ‘3,<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi mathvariant="normal">’</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal"> </mi><mi mathvariant="normal"> </mi><mi mathvariant="normal"> </mi><mi mathvariant="normal">删</mi><mi mathvariant="normal">除</mi><mi mathvariant="normal">从</mi><mi mathvariant="normal">第</mi><mn>3</mn><mi mathvariant="normal">行</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">一</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">内</mi><mi mathvariant="normal">容</mi><mi mathvariant="normal">。</mi><mi>s</mi><mi>e</mi><mi>d</mi><mi mathvariant="normal">‘</mi></mrow><annotation encoding="application/x-tex">d’ file    删除从第3行到最后一行的内容。
+sed ‘</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">d</span><span class="mord">’</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord"> </span><span class="mord"> </span><span class="mord"> </span><span class="mord cjk_fallback">删</span><span class="mord cjk_fallback">除</span><span class="mord cjk_fallback">从</span><span class="mord cjk_fallback">第</span><span class="mord">3</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">内</span><span class="mord cjk_fallback">容</span><span class="mord cjk_fallback">。</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord">‘</span></span></span></span>d’ file 删除最后一行的内容<br>
+sed ‘/abc/d’ 删除包含abc的行。<br>
+sed ‘3d’ file 删除第三行的内容</p>
+<p>替换：s命令</p>
+<p>sed  ‘s/abc/def/g’ file 把行内的所有abc替换成def，如果没有g,则只替换行内的第一个abc<br>
+sed  -n ‘s/abc/def/p’ file 只打印发生替换的那些行<br>
+sed  ‘s/abc/&amp;def/’ file 在所有的abc后面添加def（&amp;表示匹配的内容）<br>
+sed  -n ‘s/abc/def/gp’ file 把所有的abc替换成def，并打印发生替换的那些行<br>
+sed  ‘s#abc#def#g’ file 把所有的abc替换成def，跟在替换s后面的字符就是查找串和 替换串之间的分割字符，本例中试#</p>
+<p>指定行的范围：逗号</p>
+<p>sed  -n ‘/abc/,/def/p’ file 打印模式abc到def的行<br>
+sed  -n ‘5/,/def/p’ file 打印从第五行到包含def行之间的行。<br>
+sed /abd/,/def/s/aaa/bbb/g 修改从模式abc到模式def之间的行，把aaa替换成def</p>
+<p>多重编辑-e</p>
+<p>sed  -e ‘1,3d’ -e ‘s/abc/def/g’ file 删除1-3行，然后把其余行的abc替换成def</p>
+<p>读文件：r命令</p>
+<p>sed  ‘/abc/r newfile’ file 在包含abc的行后读入newfile的内容</p>
+<p>写文件：w命令</p>
+<p>sed  ‘/abc/w newfile’ file 在包含abc的行写入newfile</p>
+<p>追加：a命令</p>
+<p>sed  ‘/abc/a\def’ file 在包含abc的行后新起一行，写入def</p>
+<p>插入：i命令</p>
+<p>sed  ‘/abc/i\def’ file 在包含abc的行前新起一行，写入def</p>
+<p>修改：c命令</p>
+<p>sed  ‘/abc/c\def’ file 在包含abc的行替换成def，旧文本被覆盖</p>
+<p>读取下一行：n命令</p>
+<p>sed  ‘/abc/{n ; s/aaa/bbb/g;}’ file 读取包含abc的行的下一行，替换aaa为bbb</p>
+<p>转换：y命令</p>
+<p>sed  ‘y/abc/ABC’ file 将a替换成A，b替换成B，c替换成C（正则表达式元字符不起作用）</p>
+<p>退出：q命令</p>
+<p>sed  ‘/abc/{ s/aaa/bbb/ ;q; }’ file 在某行包含了abc，把aaa替换成bbb，然后退出sed。</p>
+<p>暂存和取用：h命令（把模式行存储到暂存缓冲区）和g（取出暂存缓冲区的行并覆盖模式缓冲区）G（取出临时缓冲区的行）命令</p>
+<p>h和g是复制行为(覆盖），H和G表示追加。<br>
+sed  -e ‘/abc/h’  -e ‘<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mi mathvariant="normal">’</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">包</mi><mi mathvariant="normal">含</mi><mi>a</mi><mi>b</mi><mi>c</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">通</mi><mi mathvariant="normal">过</mi><mi>h</mi><mi mathvariant="normal">命</mi><mi mathvariant="normal">令</mi><mi mathvariant="normal">保</mi><mi mathvariant="normal">存</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">暂</mi><mi mathvariant="normal">存</mi><mi mathvariant="normal">缓</mi><mi mathvariant="normal">冲</mi><mi mathvariant="normal">区</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">在</mi><mi mathvariant="normal">第</mi><mi mathvariant="normal">二</mi><mi mathvariant="normal">条</mi><mi mathvariant="normal">命</mi><mi mathvariant="normal">令</mi><mi mathvariant="normal">汇</mi><mi mathvariant="normal">中</mi><mi mathvariant="normal">，</mi><mi>s</mi><mi>e</mi><mi>d</mi><mi mathvariant="normal">读</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">一</mi><mi mathvariant="normal">行</mi></mrow><annotation encoding="application/x-tex">G’ file 包含abc的行通过h命令保存到暂存缓冲区，在第二条命令汇中，sed读到最后一行</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">G</span><span class="mord">’</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">包</span><span class="mord cjk_fallback">含</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">c</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">通</span><span class="mord cjk_fallback">过</span><span class="mord mathdefault">h</span><span class="mord cjk_fallback">命</span><span class="mord cjk_fallback">令</span><span class="mord cjk_fallback">保</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">暂</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">缓</span><span class="mord cjk_fallback">冲</span><span class="mord cjk_fallback">区</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">第</span><span class="mord cjk_fallback">二</span><span class="mord cjk_fallback">条</span><span class="mord cjk_fallback">命</span><span class="mord cjk_fallback">令</span><span class="mord cjk_fallback">汇</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">，</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord cjk_fallback">读</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span></span></span></span>时，G命令从暂存缓冲区中读取一行，追加到模式缓冲区的后面。即所有包含abc的行的最后一行被复制到文件末尾。<br>
+sed -e ‘/abc/{h; d;}’       -e  ‘/def/{g; }’ file 包含abc的行会移到包含def的行上，并进行覆盖。</p>
+<p>暂存和互换：h和x命令</p>
+<p>sed  -e ‘/abc/h’  -e ‘/def/x’ file 包含abc的行会被换成def的行。</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/cache-control-ge-zhi-de-li-jie/">
+              <h3 class="post-title">
+                cache-control各值的理解
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

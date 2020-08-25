@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chaosreigned.github.io</id>
     <title>Chaosreigned</title>
-    <updated>2020-08-25T03:13:29.627Z</updated>
+    <updated>2020-08-25T06:09:43.943Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chaosreigned.github.io"/>
     <link rel="self" href="https://chaosreigned.github.io/atom.xml"/>
@@ -10,6 +10,271 @@
     <logo>https://chaosreigned.github.io/images/avatar.png</logo>
     <icon>https://chaosreigned.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Chaosreigned</rights>
+    <entry>
+        <title type="html"><![CDATA[socket常见异常]]></title>
+        <id>https://chaosreigned.github.io/post/socket-chang-jian-yi-chang/</id>
+        <link href="https://chaosreigned.github.io/post/socket-chang-jian-yi-chang/">
+        </link>
+        <updated>2020-08-25T03:38:57.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>
+<p>java.net.BindException:Address already in use: JVM_Bind<br>
+该异常发生在服务器端进行new ServerSocket(port)（port是一个0，65536的整型值）操作时。异常的原因是以为与port一样的一个端口已经被启动，并进行监听。此时用netstat –an命令，可以看到一个Listending状态的端口。只需要找一个没有被占用的端口就能解决这个问题。</p>
+</li>
+<li>
+<p>java.net.ConnectException: Connection refused: connect<br>
+该异常发生在客户端进行new Socket(ip, port)操作时，该异常发生的原因是或者具有ip地址的机器不能找到（也就是说从当前机器不存在到指定ip路由），或者是该ip存在，但找不到指定的端口进行监听。出现该问题，首先检查客户端的ip和port是否写错了，如果正确则从客户端ping一下服务器看是否能ping通，如果能ping通（服务服务器端把ping禁掉则需要另外的办法），则看在服务器端的监听指定端口的程序是否启动，这个肯定能解决这个问题。</p>
+</li>
+<li>
+<p>java.net.SocketException: Socket is closed<br>
+该异常在客户端和服务器均可能发生。异常的原因是己方主动关闭了连接后（调用了Socket的close方法）再对网络连接进行读写操作。</p>
+</li>
+<li>
+<p>java.net.SocketException: Connection reset<br>
+该异常在客户端和服务器端均有可能发生，引起该异常的原因是一端退出，但退出时并未关闭该连接，另一端如果在从连接中读数据则抛出该异常（Connection reset）。简单的说就是在连接断开后的读和写操作引起的。</p>
+</li>
+<li>
+<p>java.net.SocketException:Connect reset by peer:Socket write error<br>
+该异常在客户端和服务器端均有可能发生，引起该异常的原因是如果一端的Socket被关闭（或主动关闭或者因为异常退出而引起的关闭），另一端仍发送数据，发送的第一个数据包引发该异常(Connect reset by peer)。</p>
+</li>
+<li>
+<p>java.net.SocketException: Broken pipe<br>
+该异常在客户端和服务器均有可能发生。在第5个异常的第一种情况中（也就是抛出SocketExcepton:Connect reset by peer:Socket write error后），如果再继续写数据则抛出该异常。<br>
+前两个异常的解决方法是首先确保程序退出前关闭所有的网络连接，其次是要检测对方的关闭连接操作，发现对方关闭连接后自己也要关闭该连接。</p>
+</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[sed命令]]></title>
+        <id>https://chaosreigned.github.io/post/sed-ming-ling/</id>
+        <link href="https://chaosreigned.github.io/post/sed-ming-ling/">
+        </link>
+        <updated>2020-08-25T03:37:52.000Z</updated>
+        <content type="html"><![CDATA[<p>sed在处理文本时是逐行读取文件内容，读到匹配的行就根据指令做操作，不匹配就跳过</p>
+<p>-i选项：直接作用源文件，源文件将被修改。</p>
+<p>常用：<br>
+sed -i &quot;s/xxx/yyy/&quot; file</p>
+<p>打印：p命令</p>
+<p>sed ‘/abc/p’ file 打印file中包含abc的行。默认情况sed把所有行都打印到屏幕，如果某行匹配到模式，则把该行另外再打印一遍<br>
+sed  -n ‘/abc/p’ file 和上面一样，只是去掉了sed的默认行为，只会打印匹配的行</p>
+<p>删除：d命令</p>
+<p>sed ‘3,<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi mathvariant="normal">’</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal"> </mi><mi mathvariant="normal"> </mi><mi mathvariant="normal"> </mi><mi mathvariant="normal">删</mi><mi mathvariant="normal">除</mi><mi mathvariant="normal">从</mi><mi mathvariant="normal">第</mi><mn>3</mn><mi mathvariant="normal">行</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">一</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">内</mi><mi mathvariant="normal">容</mi><mi mathvariant="normal">。</mi><mi>s</mi><mi>e</mi><mi>d</mi><mi mathvariant="normal">‘</mi></mrow><annotation encoding="application/x-tex">d’ file    删除从第3行到最后一行的内容。
+sed ‘</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">d</span><span class="mord">’</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord"> </span><span class="mord"> </span><span class="mord"> </span><span class="mord cjk_fallback">删</span><span class="mord cjk_fallback">除</span><span class="mord cjk_fallback">从</span><span class="mord cjk_fallback">第</span><span class="mord">3</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">内</span><span class="mord cjk_fallback">容</span><span class="mord cjk_fallback">。</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord">‘</span></span></span></span>d’ file 删除最后一行的内容<br>
+sed ‘/abc/d’ 删除包含abc的行。<br>
+sed ‘3d’ file 删除第三行的内容</p>
+<p>替换：s命令</p>
+<p>sed  ‘s/abc/def/g’ file 把行内的所有abc替换成def，如果没有g,则只替换行内的第一个abc<br>
+sed  -n ‘s/abc/def/p’ file 只打印发生替换的那些行<br>
+sed  ‘s/abc/&amp;def/’ file 在所有的abc后面添加def（&amp;表示匹配的内容）<br>
+sed  -n ‘s/abc/def/gp’ file 把所有的abc替换成def，并打印发生替换的那些行<br>
+sed  ‘s#abc#def#g’ file 把所有的abc替换成def，跟在替换s后面的字符就是查找串和 替换串之间的分割字符，本例中试#</p>
+<p>指定行的范围：逗号</p>
+<p>sed  -n ‘/abc/,/def/p’ file 打印模式abc到def的行<br>
+sed  -n ‘5/,/def/p’ file 打印从第五行到包含def行之间的行。<br>
+sed /abd/,/def/s/aaa/bbb/g 修改从模式abc到模式def之间的行，把aaa替换成def</p>
+<p>多重编辑-e</p>
+<p>sed  -e ‘1,3d’ -e ‘s/abc/def/g’ file 删除1-3行，然后把其余行的abc替换成def</p>
+<p>读文件：r命令</p>
+<p>sed  ‘/abc/r newfile’ file 在包含abc的行后读入newfile的内容</p>
+<p>写文件：w命令</p>
+<p>sed  ‘/abc/w newfile’ file 在包含abc的行写入newfile</p>
+<p>追加：a命令</p>
+<p>sed  ‘/abc/a\def’ file 在包含abc的行后新起一行，写入def</p>
+<p>插入：i命令</p>
+<p>sed  ‘/abc/i\def’ file 在包含abc的行前新起一行，写入def</p>
+<p>修改：c命令</p>
+<p>sed  ‘/abc/c\def’ file 在包含abc的行替换成def，旧文本被覆盖</p>
+<p>读取下一行：n命令</p>
+<p>sed  ‘/abc/{n ; s/aaa/bbb/g;}’ file 读取包含abc的行的下一行，替换aaa为bbb</p>
+<p>转换：y命令</p>
+<p>sed  ‘y/abc/ABC’ file 将a替换成A，b替换成B，c替换成C（正则表达式元字符不起作用）</p>
+<p>退出：q命令</p>
+<p>sed  ‘/abc/{ s/aaa/bbb/ ;q; }’ file 在某行包含了abc，把aaa替换成bbb，然后退出sed。</p>
+<p>暂存和取用：h命令（把模式行存储到暂存缓冲区）和g（取出暂存缓冲区的行并覆盖模式缓冲区）G（取出临时缓冲区的行）命令</p>
+<p>h和g是复制行为(覆盖），H和G表示追加。<br>
+sed  -e ‘/abc/h’  -e ‘<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mi mathvariant="normal">’</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">包</mi><mi mathvariant="normal">含</mi><mi>a</mi><mi>b</mi><mi>c</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">通</mi><mi mathvariant="normal">过</mi><mi>h</mi><mi mathvariant="normal">命</mi><mi mathvariant="normal">令</mi><mi mathvariant="normal">保</mi><mi mathvariant="normal">存</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">暂</mi><mi mathvariant="normal">存</mi><mi mathvariant="normal">缓</mi><mi mathvariant="normal">冲</mi><mi mathvariant="normal">区</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">在</mi><mi mathvariant="normal">第</mi><mi mathvariant="normal">二</mi><mi mathvariant="normal">条</mi><mi mathvariant="normal">命</mi><mi mathvariant="normal">令</mi><mi mathvariant="normal">汇</mi><mi mathvariant="normal">中</mi><mi mathvariant="normal">，</mi><mi>s</mi><mi>e</mi><mi>d</mi><mi mathvariant="normal">读</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">一</mi><mi mathvariant="normal">行</mi></mrow><annotation encoding="application/x-tex">G’ file 包含abc的行通过h命令保存到暂存缓冲区，在第二条命令汇中，sed读到最后一行</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">G</span><span class="mord">’</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">包</span><span class="mord cjk_fallback">含</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">c</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">通</span><span class="mord cjk_fallback">过</span><span class="mord mathdefault">h</span><span class="mord cjk_fallback">命</span><span class="mord cjk_fallback">令</span><span class="mord cjk_fallback">保</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">暂</span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">缓</span><span class="mord cjk_fallback">冲</span><span class="mord cjk_fallback">区</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">第</span><span class="mord cjk_fallback">二</span><span class="mord cjk_fallback">条</span><span class="mord cjk_fallback">命</span><span class="mord cjk_fallback">令</span><span class="mord cjk_fallback">汇</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">，</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mord cjk_fallback">读</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span></span></span></span>时，G命令从暂存缓冲区中读取一行，追加到模式缓冲区的后面。即所有包含abc的行的最后一行被复制到文件末尾。<br>
+sed -e ‘/abc/{h; d;}’       -e  ‘/def/{g; }’ file 包含abc的行会移到包含def的行上，并进行覆盖。</p>
+<p>暂存和互换：h和x命令</p>
+<p>sed  -e ‘/abc/h’  -e ‘/def/x’ file 包含abc的行会被换成def的行。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[cache-control各值的理解]]></title>
+        <id>https://chaosreigned.github.io/post/cache-control-ge-zhi-de-li-jie/</id>
+        <link href="https://chaosreigned.github.io/post/cache-control-ge-zhi-de-li-jie/">
+        </link>
+        <updated>2020-08-25T03:37:06.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>HTTP1.1 max-age 的优先级比 Expires 高；HTTP1.0 Expires的优先级比  max-age 高；</li>
+<li>max-age，max-stale 和 min-fresh 的关系：缓存使用期 age 表示缓存自 Server 将其发出（或最后一次被服务器再验证）之后过去的时间，则如果 age + min-fresh &lt; max-age，缓存未过期；如果 age + min-fresh &gt;= max-age &amp;&amp; age + min-fresh &lt; max-age + max-stale，则虽然缓存过期了，但是缓存继续可以使用，只是在头部添加 110 警告码；如果 age + min-fresh &gt;= max-age + max-stale，则缓存过期且不可使用。</li>
+<li>no-cache 和 max-age = 0 的区别：参考（no-cache有强制性）</li>
+<li>no-cache 和 no-store 区别：no-cache 实际会进行缓存，只是在缓存响应之前会先进行一次新鲜度再验证（浏览器的 f5 刷新）；而 no-store 不会进行缓存，每次都是向获取服务器的最新数据（浏览器的强制刷新）</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux和Windows编码方式互换]]></title>
+        <id>https://chaosreigned.github.io/post/linux-he-windows-bian-ma-fang-shi-hu-huan/</id>
+        <link href="https://chaosreigned.github.io/post/linux-he-windows-bian-ma-fang-shi-hu-huan/">
+        </link>
+        <updated>2020-08-25T03:33:50.000Z</updated>
+        <content type="html"><![CDATA[<p>vim filename</p>
+<p>利用如下命令查看文件格式<br>
+:set ff 或 :set fileformat</p>
+<p>可以看到如下信息<br>
+fileformat=dos 或 fileformat=unix</p>
+<p>利用如下命令修改文件格式<br>
+:set ff=unix 或 :set fileformat=unix<br>
+:wq (存盘退出)</p>
+<p>最后再执行文件</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HttpClient三种超时]]></title>
+        <id>https://chaosreigned.github.io/post/httpclient-san-chong-chao-shi/</id>
+        <link href="https://chaosreigned.github.io/post/httpclient-san-chong-chao-shi/">
+        </link>
+        <updated>2020-08-25T03:31:41.000Z</updated>
+        <content type="html"><![CDATA[<p>connectTimeOut：指建立连接的超时时间。如果到了指定的时间，还没建立连接，则报异常。<br>
+connectionRequestTimeOut：指从连接池获取到连接的超时时间，如果是非连接池的话，该参数暂时没有发现有什么用处<br>
+socketTimeOut：请求获取数据的超时时间(即响应时间)，单位毫秒。 如果访问一个接口，多少时间内无法返回数据，就直接放弃此次调用。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HashMap]]></title>
+        <id>https://chaosreigned.github.io/post/hashmap/</id>
+        <link href="https://chaosreigned.github.io/post/hashmap/">
+        </link>
+        <updated>2020-08-25T03:30:52.000Z</updated>
+        <content type="html"><![CDATA[<p>HashMap有两个参数影响其性能：初始容量和加载因子。</p>
+<ul>
+<li>HashMap默认初始容量是16，加载因子是0.75。</li>
+<li>容量是哈希表中桶(Entry数组)的数量，初始容量只是哈希表在创建时的容量。</li>
+<li>加载因子是哈希表在其容量自动增加之前可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，通过调用 rehash 方法将容量翻倍。</li>
+</ul>
+<hr>
+<p>hashcode：</p>
+<pre><code>static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+</code></pre>
+<p>hash表中的位置：hashcode&amp;(length-1)		length为hash表容量</p>
+<p>位运算比取余运算快很多，但是由于位运算只计算最后几位，因此很容易冲突，所以需要对hashcode的高位和低位进行XOR（异或）操作，来降低冲突</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CRON]]></title>
+        <id>https://chaosreigned.github.io/post/cron/</id>
+        <link href="https://chaosreigned.github.io/post/cron/">
+        </link>
+        <updated>2020-08-25T03:29:28.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="cron是基于时间的作业调度系统">cron是基于时间的作业调度系统</h3>
+<table>
+<thead>
+<tr>
+<th>领域</th>
+<th>需要</th>
+<th>允许的值</th>
+<th>允许特殊字符</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分钟</td>
+<td>是</td>
+<td>0-59</td>
+<td>* , -</td>
+<td></td>
+</tr>
+<tr>
+<td>小时</td>
+<td>是</td>
+<td>0-23</td>
+<td>* , -</td>
+<td></td>
+</tr>
+<tr>
+<td>一个月的一天</td>
+<td>是</td>
+<td>1-31</td>
+<td>* , - ? L W</td>
+<td>? L W 仅在某些实施中</td>
+</tr>
+<tr>
+<td>月</td>
+<td>是</td>
+<td>1-12或JAN-DEC</td>
+<td>* , -</td>
+<td></td>
+</tr>
+<tr>
+<td>星期几</td>
+<td>是</td>
+<td>0-6或SUN-SAT</td>
+<td>* , - ? L #</td>
+<td>? L # 仅在某些实施中</td>
+</tr>
+</tbody>
+</table>
+<p>jenkins中H表示随机</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Bash]]></title>
+        <id>https://chaosreigned.github.io/post/bash/</id>
+        <link href="https://chaosreigned.github.io/post/bash/">
+        </link>
+        <updated>2020-08-25T03:19:00.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="与-反引号">$( ) 与 ``(反引号)</h3>
+<p>在 bash shell 中，$( ) 和``都是用来做命令替换用(commandsubstitution)的<br>
+反引号适用性比较广，但是容易看错</p>
+<h3 id="">${ }</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow></mrow><mi mathvariant="normal">用</mi><mi mathvariant="normal">于</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">量</mi><mi mathvariant="normal">替</mi><mi mathvariant="normal">换</mi><mi mathvariant="normal">，</mi></mrow><annotation encoding="application/x-tex">{ }用于变量替换，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord"></span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">于</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">量</span><span class="mord cjk_fallback">替</span><span class="mord cjk_fallback">换</span><span class="mord cjk_fallback">，</span></span></span></span>{ } 会比较精确的界定变量名称的范围。</p>
+<h3 id="与">$[] 与 $(())</h3>
+<p>都是进行数学运算的，支持+ - * / %，但是注意，bash只能作整数运算，对于浮点数是当作字符串处理的。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$0</td>
+<td>当前脚本的文件名</td>
+</tr>
+<tr>
+<td>$n</td>
+<td>传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。</td>
+</tr>
+<tr>
+<td>$#</td>
+<td>传递给脚本或函数的参数个数。</td>
+</tr>
+<tr>
+<td>$*</td>
+<td>传递给脚本或函数的所有参数。</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>传递给脚本或函数的所有参数。被双引号(&quot; &quot;)包含时，与 $* 稍有不同，下面将会讲到。</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>上个命令的退出状态，或函数的返回值。</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[SSH passwordless & 'q' command]]></title>
         <id>https://chaosreigned.github.io/post/ssh-passwordless-and-q-command/</id>
