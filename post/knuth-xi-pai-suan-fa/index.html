@@ -2,22 +2,21 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>q | Chaos</title>
+<title>Knuth 洗牌算法 | Chaos</title>
 <link rel="shortcut icon" href="https://chaosreigned.github.io/favicon.ico?v=1598348901541">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://chaosreigned.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="q | Chaos - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Knuth 洗牌算法 | Chaos - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="#!/bin/bash
+    <meta name="description" content="for (int i = n - 1; i &gt;= 0; i—) {
+    swap(arr[i], arr[new Random().nextInt(i + 1)]);
+}
 
-typeset profile=${1?}; shift
-
-typeset script_dir=$(dirname $0)
-typeset node_list=$(cat ${script_dir}/$profi..." />
-    <meta name="keywords" content="script" />
+" />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -79,7 +78,7 @@ typeset node_list=$(cat ${script_dir}/$profi..." />
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              q
+              Knuth 洗牌算法
             </h2>
             <div class="post-info">
               <span>
@@ -89,29 +88,13 @@ typeset node_list=$(cat ${script_dir}/$profi..." />
                 1 min read
               </span>
               
-                <a href="https://chaosreigned.github.io/tag/a9QIgh1q5/" class="post-tag">
-                  # script
-                </a>
-              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <pre><code>#!/bin/bash
-
-typeset profile=${1?}; shift
-
-typeset script_dir=$(dirname $0)
-typeset node_list=$(cat ${script_dir}/$profile)
-
-typeset -i rc=0
-for node in $node_list; do
-    echo &quot;==== ${node} ====&quot;
-    ssh $node $*; ((rc+=$?))
-    echo
-done
-
-exit $rc
+                <pre><code>for (int i = n - 1; i &gt;= 0; i—) {
+    swap(arr[i], arr[new Random().nextInt(i + 1)]);
+}
 </code></pre>
 
               </div>
@@ -122,6 +105,15 @@ exit $rc
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/yong-hu-tai-yu-nei-he-tai/">
+              <h3 class="post-title">
+                用户态与内核态
+              </h3>
+            </a>
+          </div>
         
 
         

@@ -2,22 +2,22 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>q | Chaos</title>
+<title>用户态与内核态 | Chaos</title>
 <link rel="shortcut icon" href="https://chaosreigned.github.io/favicon.ico?v=1598348901541">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://chaosreigned.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="q | Chaos - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="用户态与内核态 | Chaos - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="#!/bin/bash
+    <meta name="description" content="Cpu指令中有一些指令是非常危险的，所以cpu会有特权级别，
 
-typeset profile=${1?}; shift
-
-typeset script_dir=$(dirname $0)
-typeset node_list=$(cat ${script_dir}/$profi..." />
-    <meta name="keywords" content="script" />
+用户态为RING3，只能执行非特权的指令
+内核态为RING0，可以执行特权级别最高的指令
+每个进程都有自己的用户栈和内核栈，
+系统调用其实是一种软中断，会从用户态切换到内核态，..." />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -79,7 +79,7 @@ typeset node_list=$(cat ${script_dir}/$profi..." />
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              q
+              用户态与内核态
             </h2>
             <div class="post-info">
               <span>
@@ -89,30 +89,17 @@ typeset node_list=$(cat ${script_dir}/$profi..." />
                 1 min read
               </span>
               
-                <a href="https://chaosreigned.github.io/tag/a9QIgh1q5/" class="post-tag">
-                  # script
-                </a>
-              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <pre><code>#!/bin/bash
-
-typeset profile=${1?}; shift
-
-typeset script_dir=$(dirname $0)
-typeset node_list=$(cat ${script_dir}/$profile)
-
-typeset -i rc=0
-for node in $node_list; do
-    echo &quot;==== ${node} ====&quot;
-    ssh $node $*; ((rc+=$?))
-    echo
-done
-
-exit $rc
-</code></pre>
+                <p>Cpu指令中有一些指令是非常危险的，所以cpu会有特权级别，</p>
+<ul>
+<li>用户态为RING3，只能执行非特权的指令</li>
+<li>内核态为RING0，可以执行特权级别最高的指令</li>
+<li>每个进程都有自己的用户栈和内核栈，</li>
+<li>系统调用其实是一种软中断，会从用户态切换到内核态，首先会把用户栈的地址保存在内核栈中，然后设置堆栈指针寄存器的地址为内核栈的地址，退出的时候将之前保存的用户栈地址恢复到栈指针寄存器中，</li>
+</ul>
 
               </div>
               <div class="toc-container">
@@ -122,6 +109,15 @@ exit $rc
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/java-bing-fa/">
+              <h3 class="post-title">
+                java并发
+              </h3>
+            </a>
+          </div>
         
 
         

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chaosreigned.github.io</id>
     <title>Chaos</title>
-    <updated>2020-08-25T09:41:44.471Z</updated>
+    <updated>2020-08-25T09:48:35.430Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chaosreigned.github.io"/>
     <link rel="self" href="https://chaosreigned.github.io/atom.xml"/>
@@ -10,6 +10,68 @@
     <logo>https://chaosreigned.github.io/images/avatar.png</logo>
     <icon>https://chaosreigned.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Chaos</rights>
+    <entry>
+        <title type="html"><![CDATA[Knuth 洗牌算法]]></title>
+        <id>https://chaosreigned.github.io/post/knuth-xi-pai-suan-fa/</id>
+        <link href="https://chaosreigned.github.io/post/knuth-xi-pai-suan-fa/">
+        </link>
+        <updated>2020-08-25T09:46:53.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>for (int i = n - 1; i &gt;= 0; i—) {
+    swap(arr[i], arr[new Random().nextInt(i + 1)]);
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[用户态与内核态]]></title>
+        <id>https://chaosreigned.github.io/post/yong-hu-tai-yu-nei-he-tai/</id>
+        <link href="https://chaosreigned.github.io/post/yong-hu-tai-yu-nei-he-tai/">
+        </link>
+        <updated>2020-08-25T09:45:11.000Z</updated>
+        <content type="html"><![CDATA[<p>Cpu指令中有一些指令是非常危险的，所以cpu会有特权级别，</p>
+<ul>
+<li>用户态为RING3，只能执行非特权的指令</li>
+<li>内核态为RING0，可以执行特权级别最高的指令</li>
+<li>每个进程都有自己的用户栈和内核栈，</li>
+<li>系统调用其实是一种软中断，会从用户态切换到内核态，首先会把用户栈的地址保存在内核栈中，然后设置堆栈指针寄存器的地址为内核栈的地址，退出的时候将之前保存的用户栈地址恢复到栈指针寄存器中，</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[java并发]]></title>
+        <id>https://chaosreigned.github.io/post/java-bing-fa/</id>
+        <link href="https://chaosreigned.github.io/post/java-bing-fa/">
+        </link>
+        <updated>2020-08-25T09:43:40.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="synchronized加锁非公平锁">synchronized：加锁（非公平锁）</h3>
+<p>代码块和方法都是给对象加锁，静态方法给类加锁</p>
+<ul>
+<li>代码块：每个对象头中都有一个monitor，synchronized通过转换成字节码后会有一个monitorenter和monitorexit，enter会将monitor的锁计数器+1，exit会-1</li>
+<li>方法：直接给方法加上ACC_SYNCHRONIZED标记</li>
+</ul>
+<h3 id="volatile保证可见性不保证原子性">Volatile：保证可见性不保证原子性</h3>
+<ul>
+<li>java内存模型每个线程都有自己的工作内存，所以有时候主存改变了，但线程的工作内存还没改变，就会造成问题，所以需要volatile定义，指定该变量是多变的，每次都要从主存读</li>
+</ul>
+<h3 id="threadlocal">ThreadLocal：</h3>
+<ul>
+<li>每个线程都有自己的本地变量，都存放在ThreadLocalMap中，避免线程安全问题，通过get()、set()来获取更改该线程的资源</li>
+<li>Thread中有ThreadLocalMap，每个ThreadLocal和它的变量都会存放在ThreadLocalMap中，而ThreadLocalMap是ThreadLocal的内部类</li>
+</ul>
+<h3 id="executor框架">Executor框架：</h3>
+<ul>
+<li>定义ThreadPoolExcutor线程池，然后主线程实现runnable或者callable接口，再通过线程池的excute或者submit方法执行</li>
+<li>ThreadPoolExcutor可以配置线程数量和队列数量，而FixedThreadPool、cachedThreadPool不能配置，容易OOM</li>
+</ul>
+<p>乐观锁：不加锁，每次写的时候check该值有没有被改变过，CAS，ABA问题<br>
+悲观锁：每次写之前都加锁，synchronized，AQS<br>
+AQS用CAS来update锁</p>
+<h3 id="concurrenthashmap-线程安全的具体实现方式">ConcurrentHashMap 线程安全的具体实现方式：</h3>
+<ul>
+<li>数据分段存储，每段一个锁，主要分为Segment和HashEntry，Segment是分段锁，每个Segment管理一个HashEntry</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[最长递增子序列]]></title>
         <id>https://chaosreigned.github.io/post/zui-chang-di-zeng-zi-xu-lie/</id>
@@ -312,57 +374,6 @@ sed -e ‘/abc/{h; d;}’       -e  ‘/def/{g; }’ file 包含abc的行
 <li>no-cache 和 max-age = 0 的区别：参考（no-cache有强制性）</li>
 <li>no-cache 和 no-store 区别：no-cache 实际会进行缓存，只是在缓存响应之前会先进行一次新鲜度再验证（浏览器的 f5 刷新）；而 no-store 不会进行缓存，每次都是向获取服务器的最新数据（浏览器的强制刷新）</li>
 </ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Linux和Windows编码方式互换]]></title>
-        <id>https://chaosreigned.github.io/post/linux-he-windows-bian-ma-fang-shi-hu-huan/</id>
-        <link href="https://chaosreigned.github.io/post/linux-he-windows-bian-ma-fang-shi-hu-huan/">
-        </link>
-        <updated>2020-08-25T03:33:50.000Z</updated>
-        <content type="html"><![CDATA[<p>vim filename</p>
-<p>利用如下命令查看文件格式<br>
-:set ff 或 :set fileformat</p>
-<p>可以看到如下信息<br>
-fileformat=dos 或 fileformat=unix</p>
-<p>利用如下命令修改文件格式<br>
-:set ff=unix 或 :set fileformat=unix<br>
-:wq (存盘退出)</p>
-<p>最后再执行文件</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[HttpClient三种超时]]></title>
-        <id>https://chaosreigned.github.io/post/httpclient-san-chong-chao-shi/</id>
-        <link href="https://chaosreigned.github.io/post/httpclient-san-chong-chao-shi/">
-        </link>
-        <updated>2020-08-25T03:31:41.000Z</updated>
-        <content type="html"><![CDATA[<p>connectTimeOut：指建立连接的超时时间。如果到了指定的时间，还没建立连接，则报异常。<br>
-connectionRequestTimeOut：指从连接池获取到连接的超时时间，如果是非连接池的话，该参数暂时没有发现有什么用处<br>
-socketTimeOut：请求获取数据的超时时间(即响应时间)，单位毫秒。 如果访问一个接口，多少时间内无法返回数据，就直接放弃此次调用。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[HashMap]]></title>
-        <id>https://chaosreigned.github.io/post/hashmap/</id>
-        <link href="https://chaosreigned.github.io/post/hashmap/">
-        </link>
-        <updated>2020-08-25T03:30:52.000Z</updated>
-        <content type="html"><![CDATA[<p>HashMap有两个参数影响其性能：初始容量和加载因子。</p>
-<ul>
-<li>HashMap默认初始容量是16，加载因子是0.75。</li>
-<li>容量是哈希表中桶(Entry数组)的数量，初始容量只是哈希表在创建时的容量。</li>
-<li>加载因子是哈希表在其容量自动增加之前可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，通过调用 rehash 方法将容量翻倍。</li>
-</ul>
-<hr>
-<p>hashcode：</p>
-<pre><code>static final int hash(Object key) {
-    int h;
-    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
-}
-</code></pre>
-<p>hash表中的位置：hashcode&amp;(length-1)		length为hash表容量</p>
-<p>位运算比取余运算快很多，但是由于位运算只计算最后几位，因此很容易冲突，所以需要对hashcode的高位和低位进行XOR（异或）操作，来降低冲突</p>
 ]]></content>
     </entry>
 </feed>
