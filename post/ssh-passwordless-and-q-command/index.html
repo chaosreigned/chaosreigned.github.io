@@ -1,0 +1,219 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SSH passwordless &amp; &#39;q&#39; command | Chaosreigned</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io/favicon.ico?v=1598325101011">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="SSH passwordless &amp; &#39;q&#39; command | Chaosreigned - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="Setup passwordless SSH and 'q' command and create user in the list of nodes.
+Usage:
+1. Create node_list file with the li..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io">
+  <img class="avatar" src="https://chaosreigned.github.io/images/avatar.png?v=1598325101011" alt="">
+  </a>
+  <h1 class="site-title">
+    Chaosreigned
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              SSH passwordless &amp; &#39;q&#39; command
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-25
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="setup-passwordless-ssh-and-q-command-and-create-user-in-the-list-of-nodes">Setup passwordless SSH and 'q' command and create user in the list of nodes.</h2>
+<h2 id="usage">Usage:</h2>
+<h3 id="1-create-node_list-file-with-the-list-of-node-ips-each-node-ip-takes-a-single-line">1. Create node_list file with the list of node IP's. Each node IP takes a single line.</h3>
+<pre><code>$ cat node_list 
+10.100.150.98
+10.100.150.99
+10.100.150.100
+10.100.150.101
+...
+</code></pre>
+<h3 id="2-run-ssh-keygen-t-rsa-with-all-default-options-to-generate-public-key-skip-this-step-if-you-have-already-done-it">2. Run ssh-keygen -t rsa with all default options to generate public key (skip this step if you have already done it).</h3>
+<h3 id="3-make-sure-sshpass-is-installed-on-all-nodes">3. Make sure sshpass is installed on all nodes.</h3>
+<h3 id="4-run-visudo-to-comment-the-line-of-defaults-requiretty-in-all-nodes">4. Run visudo to comment the line of &quot;Defaults    requiretty&quot; in all nodes.</h3>
+<h3 id="5-run-setup_allsh-to-setup-passwordless-ssh">5. Run setup_all.sh to setup passwordless SSH.</h3>
+<pre><code>$ setup_all.sh &lt;user&gt; &lt;password&gt;
+</code></pre>
+<h3 id="6-run-q-node_list-hostname-to-test-the-configuration-result-if-the-command-runs-smoothly-without-asking-password-in-any-node-then-you-are-good-to-go">6. Run 'q node_list hostname' to test the configuration result. If the command runs smoothly without asking password in any node, then you are good to go.</h3>
+<pre><code>$ q node_list hostname
+==== 10.100.150.98 ====
+vm-150-98
+
+==== 10.100.150.99 ====
+vm-150-99
+
+==== 10.100.150.100 ====
+vm-150-100
+
+==== 10.100.150.101 ====
+vm-150-101
+</code></pre>
+<h3 id="7-run-create_usersh-to-create-your-own-user-in-all-the-nodes">7. Run create_user.sh to create your own user in all the nodes.</h3>
+<pre><code>$ create_user.sh &lt;user&gt; &lt;password&gt; [non_sudoer|sudoer|sudoer_nopass]
+</code></pre>
+<h3 id="8-login-with-your-own-user-and-repeat-step-1-6-to-setup-passwordless-ssh-for-it-then-never-get-back-to-root-user">8. Login with your own user and repeat step 1 - 6 to setup passwordless SSH for it. Then never get back to root user.</h3>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#setup-passwordless-ssh-and-q-command-and-create-user-in-the-list-of-nodes">Setup passwordless SSH and 'q' command and create user in the list of nodes.</a></li>
+<li><a href="#usage">Usage:</a>
+<ul>
+<li><a href="#1-create-node_list-file-with-the-list-of-node-ips-each-node-ip-takes-a-single-line">1. Create node_list file with the list of node IP's. Each node IP takes a single line.</a></li>
+<li><a href="#2-run-ssh-keygen-t-rsa-with-all-default-options-to-generate-public-key-skip-this-step-if-you-have-already-done-it">2. Run ssh-keygen -t rsa with all default options to generate public key (skip this step if you have already done it).</a></li>
+<li><a href="#3-make-sure-sshpass-is-installed-on-all-nodes">3. Make sure sshpass is installed on all nodes.</a></li>
+<li><a href="#4-run-visudo-to-comment-the-line-of-defaults-requiretty-in-all-nodes">4. Run visudo to comment the line of &quot;Defaults    requiretty&quot; in all nodes.</a></li>
+<li><a href="#5-run-setup_allsh-to-setup-passwordless-ssh">5. Run setup_all.sh to setup passwordless SSH.</a></li>
+<li><a href="#6-run-q-node_list-hostname-to-test-the-configuration-result-if-the-command-runs-smoothly-without-asking-password-in-any-node-then-you-are-good-to-go">6. Run 'q node_list hostname' to test the configuration result. If the command runs smoothly without asking password in any node, then you are good to go.</a></li>
+<li><a href="#7-run-create_usersh-to-create-your-own-user-in-all-the-nodes">7. Run create_user.sh to create your own user in all the nodes.</a></li>
+<li><a href="#8-login-with-your-own-user-and-repeat-step-1-6-to-setup-passwordless-ssh-for-it-then-never-get-back-to-root-user">8. Login with your own user and repeat step 1 - 6 to setup passwordless SSH for it. Then never get back to root user.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

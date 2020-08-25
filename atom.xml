@@ -1,15 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chaosreigned.github.io</id>
-    <title>Gridea</title>
-    <updated>2020-08-25T02:36:27.066Z</updated>
+    <title>Chaosreigned</title>
+    <updated>2020-08-25T03:13:29.627Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chaosreigned.github.io"/>
     <link rel="self" href="https://chaosreigned.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://chaosreigned.github.io/images/avatar.png</logo>
     <icon>https://chaosreigned.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <rights>All rights reserved 2020, Chaosreigned</rights>
+    <entry>
+        <title type="html"><![CDATA[SSH passwordless & 'q' command]]></title>
+        <id>https://chaosreigned.github.io/post/ssh-passwordless-and-q-command/</id>
+        <link href="https://chaosreigned.github.io/post/ssh-passwordless-and-q-command/">
+        </link>
+        <updated>2020-08-25T03:10:19.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="setup-passwordless-ssh-and-q-command-and-create-user-in-the-list-of-nodes">Setup passwordless SSH and 'q' command and create user in the list of nodes.</h2>
+<h2 id="usage">Usage:</h2>
+<h3 id="1-create-node_list-file-with-the-list-of-node-ips-each-node-ip-takes-a-single-line">1. Create node_list file with the list of node IP's. Each node IP takes a single line.</h3>
+<pre><code>$ cat node_list 
+10.100.150.98
+10.100.150.99
+10.100.150.100
+10.100.150.101
+...
+</code></pre>
+<h3 id="2-run-ssh-keygen-t-rsa-with-all-default-options-to-generate-public-key-skip-this-step-if-you-have-already-done-it">2. Run ssh-keygen -t rsa with all default options to generate public key (skip this step if you have already done it).</h3>
+<h3 id="3-make-sure-sshpass-is-installed-on-all-nodes">3. Make sure sshpass is installed on all nodes.</h3>
+<h3 id="4-run-visudo-to-comment-the-line-of-defaults-requiretty-in-all-nodes">4. Run visudo to comment the line of &quot;Defaults    requiretty&quot; in all nodes.</h3>
+<h3 id="5-run-setup_allsh-to-setup-passwordless-ssh">5. Run setup_all.sh to setup passwordless SSH.</h3>
+<pre><code>$ setup_all.sh &lt;user&gt; &lt;password&gt;
+</code></pre>
+<h3 id="6-run-q-node_list-hostname-to-test-the-configuration-result-if-the-command-runs-smoothly-without-asking-password-in-any-node-then-you-are-good-to-go">6. Run 'q node_list hostname' to test the configuration result. If the command runs smoothly without asking password in any node, then you are good to go.</h3>
+<pre><code>$ q node_list hostname
+==== 10.100.150.98 ====
+vm-150-98
+
+==== 10.100.150.99 ====
+vm-150-99
+
+==== 10.100.150.100 ====
+vm-150-100
+
+==== 10.100.150.101 ====
+vm-150-101
+</code></pre>
+<h3 id="7-run-create_usersh-to-create-your-own-user-in-all-the-nodes">7. Run create_user.sh to create your own user in all the nodes.</h3>
+<pre><code>$ create_user.sh &lt;user&gt; &lt;password&gt; [non_sudoer|sudoer|sudoer_nopass]
+</code></pre>
+<h3 id="8-login-with-your-own-user-and-repeat-step-1-6-to-setup-passwordless-ssh-for-it-then-never-get-back-to-root-user">8. Login with your own user and repeat step 1 - 6 to setup passwordless SSH for it. Then never get back to root user.</h3>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://chaosreigned.github.io/post/hello-gridea/</id>
