@@ -1,0 +1,432 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>面试记录 | Chaos</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io/favicon.ico?v=1598347405208">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="面试记录 | Chaos - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="字节-私有云
+
+项目经验
+知识点：
+
+测试对象存储和块存储的区别
+项目测试的不同方面
+破坏性测试如何做（磁盘错误和io错误）
+page cache
+cpu cache
+多线程超过cpu核数(cpu密集/io密集)
+Raft协议概述
+
+
+算法..." />
+    <meta name="keywords" content="面试" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io">
+  <img class="avatar" src="https://chaosreigned.github.io/images/avatar.png?v=1598347405208" alt="">
+  </a>
+  <h1 class="site-title">
+    Chaos
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              面试记录
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-25
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://chaosreigned.github.io/tag/TJJzWZumP/" class="post-tag">
+                  # 面试
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="字节-私有云">字节-私有云</h2>
+<ul>
+<li>项目经验</li>
+<li>知识点：
+<ul>
+<li>测试对象存储和块存储的区别</li>
+<li>项目测试的不同方面</li>
+<li>破坏性测试如何做（磁盘错误和io错误）</li>
+<li>page cache</li>
+<li>cpu cache</li>
+<li>多线程超过cpu核数(cpu密集/io密集)</li>
+<li>Raft协议概述</li>
+</ul>
+</li>
+<li>算法：
+<ul>
+<li>有序数组找第一个大于等于target的下标</li>
+</ul>
+</li>
+<li>系统设计题：
+<ul>
+<li>设计一个多机器集群的日志查询系统（按时间查询）</li>
+<li>如何读取大文件的第N行</li>
+</ul>
+</li>
+</ul>
+<h2 id="蚂蚁">蚂蚁</h2>
+<ul>
+<li>背景（PUA）：
+<ul>
+<li>简单介绍一下你自己，教育背景、工作情况</li>
+<li>在学校发表什么论文，详细介绍下</li>
+<li>科研工作的闪光点是什么（懵逼）</li>
+<li>工作中接触过什么语言、技能，你负责什么工作</li>
+<li>工作中有遇到什么困难，你是怎么克服的</li>
+<li>你觉得你的工作有意义吗（懵逼）</li>
+</ul>
+</li>
+<li>知识点：
+<ul>
+<li>Java应用、框架你知道哪些（“java应用”把我说懵逼了）</li>
+<li>Java数据结构你知道哪些，map有哪几类</li>
+<li>Java多线程，你用过哪些</li>
+<li>volatile有了解吗（volatile发音还错了，问我“夫额特雷特”，又懵逼了）</li>
+<li>微服务了解吗，优势在哪</li>
+<li>数据库了解吗，介绍下你常用的数据库底层原理</li>
+</ul>
+</li>
+</ul>
+<h2 id="腾讯">腾讯</h2>
+<ul>
+<li>项目经验</li>
+<li>知识点：
+<ul>
+<li>测试框架是什么样子的
+<ul>
+<li>（对象存储定制的测试框架，帮助我们更简单的测试对象存储，主要的组件有：testng（层次测试用例、case成功与否判断）、testcaseManager（testName、负向case包装）、testProperity（测试环境、测试参数导入）、bucketManger、ResourceManager、ClientHelper（日志可读性）、DsManager（底层volume结构解析）、reportListener（测试结果html生成）、perfTestcore（性能测试工具）、Util类、Clean类（测试可重入））</li>
+</ul>
+</li>
+<li>grpc比http好在哪
+<ul>
+<li>grpc是二进制，http是文本，定义proto之后可以自动生成代码</li>
+</ul>
+</li>
+<li>http粘包了解吗
+<ul>
+<li>发送方：TCP为提高传输效率，发送方往往要收集到足够多的数据后才发送一包数据</li>
+<li>接收方：数据放在系统接收缓冲区，没有及时消费这些缓存就会粘包</li>
+</ul>
+</li>
+<li>Socket send3个100k的数据包，接受数据包是什么样子</li>
+<li>内核态 用户态 切换为什么比普通函数调用耗时</li>
+<li>Cas怎么实现的
+<ul>
+<li>cas是操作系统级别的，是原子操作，先check内存位置的值是不是原值，如果是就替换为新值，如果不是就不替换</li>
+</ul>
+</li>
+<li>concurrentHashMap是怎么实现线程安全的</li>
+<li>Java多线程一般是怎么用的</li>
+<li>数据库有了解的吗，levelDB是否分布式</li>
+<li>levelDB的性能
+<ul>
+<li>10亿数据量：
+<ul>
+<li>顺序读：100w</li>
+<li>随机读：5w</li>
+<li>顺序写：50w</li>
+<li>随机写：20w</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>进程fock出来的子进程是否共享堆栈
+<ul>
+<li>不会，子进程会copy父进程的所有资源、变量，但会开辟一个新地址</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="蚂蚁-支付">蚂蚁-支付</h2>
+<h3 id="一面">一面</h3>
+<ul>
+<li>项目经验
+<ul>
+<li>介绍下测试框架，你主要负责的模块</li>
+<li>性能测试的时候，主要关注哪些指标，预先设定性能测试的点</li>
+</ul>
+</li>
+<li>知识点：
+<ul>
+<li>悲观锁、乐观锁</li>
+</ul>
+</li>
+</ul>
+<h3 id="二面">二面</h3>
+<ul>
+<li>项目经验
+<ul>
+<li>为什么没有把测试框架推广到其他部门</li>
+</ul>
+</li>
+<li>知识点：
+<ul>
+<li>从哪些方面设计case</li>
+<li>设计模式知道哪些</li>
+<li>单例模式要多线程安全一般怎么实现</li>
+<li>ThreadLocal简单介绍下</li>
+</ul>
+</li>
+</ul>
+<h3 id="三面">三面</h3>
+<ul>
+<li>自我介绍</li>
+<li>项目经验</li>
+<li>职业规划：
+<ul>
+<li>为什么要离职</li>
+<li>你的优点是什么</li>
+<li>绩效，晋升</li>
+<li>你的职业规划
+<ul>
+<li>长期打算做测试开发，以测试框架、工具开发为主，至于具体做什么业务方向比较open，对于测开来说，竞争力在于两个方面吧，一个是测试经验，或者说是测试思维，可以从哪些方面设计case，如何保证自己设计的case是一个全集，另一方面就是技术，对于测开来说，自动化肯定是一个永不过时的方向</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="字节-广告">字节-广告</h2>
+<h3 id="一面-2">一面</h3>
+<ul>
+<li>项目经验</li>
+<li>知识点：
+<ul>
+<li>nohup xxx &gt; /dev/null 2&gt;&amp;1 &amp; 具体什么意思</li>
+<li>磁盘满了怎么清理</li>
+<li>git rebase命令有了解吗</li>
+</ul>
+</li>
+<li>算法：
+<ul>
+<li>比较两个json串</li>
+<li>字符串的最长不重复子串</li>
+</ul>
+</li>
+</ul>
+<h3 id="二面-2">二面</h3>
+<ul>
+<li>项目经验</li>
+<li>知识点：
+<ul>
+<li>杀死java进程起的所有进程
+<ul>
+<li>ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill -9</li>
+</ul>
+</li>
+<li>查看端口占用
+<ul>
+<li>netstat -anp | grep xxx</li>
+</ul>
+</li>
+<li>多线程怎么控制qps</li>
+<li>发送朋友圈的测试用例</li>
+</ul>
+</li>
+<li>算法：
+<ul>
+<li>翻转stack</li>
+<li>最长递增子序列</li>
+</ul>
+</li>
+</ul>
+<h3 id="三面-2">三面</h3>
+<ul>
+<li>忘记录了</li>
+</ul>
+<h2 id="xxx">xxx</h2>
+<ul>
+<li>项目经验</li>
+<li>知识点：
+<ul>
+<li>Java锁有了解吗，怎么实现的</li>
+<li>java GC有了解吗</li>
+<li>Java设计模式知道哪些</li>
+<li>单例模式怎么实现， 代理模式介绍一下</li>
+<li>HashMap介绍，底层如何实现</li>
+</ul>
+</li>
+<li>算法：
+<ul>
+<li>链表环判断</li>
+<li>环长度多少</li>
+<li>环入口</li>
+</ul>
+</li>
+</ul>
+<h2 id="xxx-2">xxx</h2>
+<ul>
+<li>项目经验</li>
+<li>知识点：
+<ul>
+<li>HashMap介绍下</li>
+<li>concurrentHashMap介绍下</li>
+<li>线程池介绍下，线程数量怎么控制</li>
+<li>MQ有了解吗</li>
+<li>redis有了解吗</li>
+</ul>
+</li>
+<li>算法：
+<ul>
+<li>两个字符串相加</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%AD%97%E8%8A%82-%E7%A7%81%E6%9C%89%E4%BA%91">字节-私有云</a></li>
+<li><a href="#%E8%9A%82%E8%9A%81">蚂蚁</a></li>
+<li><a href="#%E8%85%BE%E8%AE%AF">腾讯</a></li>
+<li><a href="#%E8%9A%82%E8%9A%81-%E6%94%AF%E4%BB%98">蚂蚁-支付</a>
+<ul>
+<li><a href="#%E4%B8%80%E9%9D%A2">一面</a></li>
+<li><a href="#%E4%BA%8C%E9%9D%A2">二面</a></li>
+<li><a href="#%E4%B8%89%E9%9D%A2">三面</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%97%E8%8A%82-%E5%B9%BF%E5%91%8A">字节-广告</a>
+<ul>
+<li><a href="#%E4%B8%80%E9%9D%A2-2">一面</a></li>
+<li><a href="#%E4%BA%8C%E9%9D%A2-2">二面</a></li>
+<li><a href="#%E4%B8%89%E9%9D%A2-2">三面</a></li>
+</ul>
+</li>
+<li><a href="#xxx">xxx</a></li>
+<li><a href="#xxx-2">xxx</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
