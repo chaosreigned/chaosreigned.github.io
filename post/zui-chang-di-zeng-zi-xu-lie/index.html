@@ -2,19 +2,20 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>cache-control各值的理解 | Chaos</title>
+<title>最长递增子序列 | Chaos</title>
 <link rel="shortcut icon" href="https://chaosreigned.github.io/favicon.ico?v=1598348497697">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://chaosreigned.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="cache-control各值的理解 | Chaos - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="最长递增子序列 | Chaos - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-HTTP1.1 max-age 的优先级比 Expires 高；HTTP1.0 Expires的优先级比  max-age 高；
-max-age，max-stale 和 min-fresh 的关系：缓存使用期 age 表示缓存自 Serv..." />
-    <meta name="keywords" content="http" />
+    <meta name="description" content="给定数组arr，设长度为n，输出arr的最长递增子序列。（如果有多个答案，请输出其中字典序最小的）
+public int[] LIS(int[] arr) {
+    // write code here
+    List&lt;Integ..." />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -76,30 +77,53 @@ max-age，max-stale 和 min-fresh 的关系：缓存使用期 age 表示缓存�
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              cache-control各值的理解
+              最长递增子序列
             </h2>
             <div class="post-info">
               <span>
                 2020-08-25
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
-              
-                <a href="https://chaosreigned.github.io/tag/DyXzK5VRn/" class="post-tag">
-                  # http
-                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <ol>
-<li>HTTP1.1 max-age 的优先级比 Expires 高；HTTP1.0 Expires的优先级比  max-age 高；</li>
-<li>max-age，max-stale 和 min-fresh 的关系：缓存使用期 age 表示缓存自 Server 将其发出（或最后一次被服务器再验证）之后过去的时间，则如果 age + min-fresh &lt; max-age，缓存未过期；如果 age + min-fresh &gt;= max-age &amp;&amp; age + min-fresh &lt; max-age + max-stale，则虽然缓存过期了，但是缓存继续可以使用，只是在头部添加 110 警告码；如果 age + min-fresh &gt;= max-age + max-stale，则缓存过期且不可使用。</li>
-<li>no-cache 和 max-age = 0 的区别：参考（no-cache有强制性）</li>
-<li>no-cache 和 no-store 区别：no-cache 实际会进行缓存，只是在缓存响应之前会先进行一次新鲜度再验证（浏览器的 f5 刷新）；而 no-store 不会进行缓存，每次都是向获取服务器的最新数据（浏览器的强制刷新）</li>
-</ol>
+                <p>给定数组arr，设长度为n，输出arr的最长递增子序列。（如果有多个答案，请输出其中字典序最小的）</p>
+<pre><code>public int[] LIS(int[] arr) {
+    // write code here
+    List&lt;Integer&gt;[] res = new ArrayList[arr.length];
+    int length = 0;
+    for (int i = 0; i &lt; arr.length; i++) {
+        int index = updateDP(res, arr[i], length);
+        length = Math.max(length, index + 1);
+    }
+    int[] ret = new int[length];
+    for (int i = 0; i &lt; length; i++) {
+        ret[i] = res[length - 1].get(i);
+    }
+    return ret;
+}
+
+private int updateDP(List&lt;Integer&gt;[] res, int val, int len) {
+    int l = 0, r = len - 1;
+    while (l &lt;= r) {
+        int mid = (l + r) / 2;
+        int midLast = res[mid].get(res[mid].size() - 1);
+        if (midLast == val) {
+            return mid;
+        } else if (midLast &gt; val) {
+            r = mid - 1;
+        } else {
+            l = mid + 1;
+        }
+    }
+    res[l] = l &gt; 0 ? new ArrayList&lt;&gt;(res[l - 1]) : new ArrayList&lt;&gt;();
+    res[l].add(val);
+    return l;
+}</code></pre>
 
               </div>
               <div class="toc-container">
@@ -112,9 +136,9 @@ max-age，max-stale 和 min-fresh 的关系：缓存使用期 age 表示缓存�
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://chaosreigned.github.io/post/linux-he-windows-bian-ma-fang-shi-hu-huan/">
+            <a href="https://chaosreigned.github.io/post/ying-ruan-lian-jie/">
               <h3 class="post-title">
-                Linux和Windows编码方式互换
+                硬/软连接
               </h3>
             </a>
           </div>

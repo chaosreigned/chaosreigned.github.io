@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chaosreigned.github.io</id>
     <title>Chaos</title>
-    <updated>2020-08-25T09:23:27.481Z</updated>
+    <updated>2020-08-25T09:41:44.471Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chaosreigned.github.io"/>
     <link rel="self" href="https://chaosreigned.github.io/atom.xml"/>
@@ -10,6 +10,157 @@
     <logo>https://chaosreigned.github.io/images/avatar.png</logo>
     <icon>https://chaosreigned.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Chaos</rights>
+    <entry>
+        <title type="html"><![CDATA[最长递增子序列]]></title>
+        <id>https://chaosreigned.github.io/post/zui-chang-di-zeng-zi-xu-lie/</id>
+        <link href="https://chaosreigned.github.io/post/zui-chang-di-zeng-zi-xu-lie/">
+        </link>
+        <updated>2020-08-25T09:40:01.000Z</updated>
+        <content type="html"><![CDATA[<p>给定数组arr，设长度为n，输出arr的最长递增子序列。（如果有多个答案，请输出其中字典序最小的）</p>
+<pre><code>public int[] LIS(int[] arr) {
+    // write code here
+    List&lt;Integer&gt;[] res = new ArrayList[arr.length];
+    int length = 0;
+    for (int i = 0; i &lt; arr.length; i++) {
+        int index = updateDP(res, arr[i], length);
+        length = Math.max(length, index + 1);
+    }
+    int[] ret = new int[length];
+    for (int i = 0; i &lt; length; i++) {
+        ret[i] = res[length - 1].get(i);
+    }
+    return ret;
+}
+
+private int updateDP(List&lt;Integer&gt;[] res, int val, int len) {
+    int l = 0, r = len - 1;
+    while (l &lt;= r) {
+        int mid = (l + r) / 2;
+        int midLast = res[mid].get(res[mid].size() - 1);
+        if (midLast == val) {
+            return mid;
+        } else if (midLast &gt; val) {
+            r = mid - 1;
+        } else {
+            l = mid + 1;
+        }
+    }
+    res[l] = l &gt; 0 ? new ArrayList&lt;&gt;(res[l - 1]) : new ArrayList&lt;&gt;();
+    res[l].add(val);
+    return l;
+}</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[硬/软连接]]></title>
+        <id>https://chaosreigned.github.io/post/ying-ruan-lian-jie/</id>
+        <link href="https://chaosreigned.github.io/post/ying-ruan-lian-jie/">
+        </link>
+        <updated>2020-08-25T09:38:39.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="硬连接">硬连接：</h3>
+<ul>
+<li>linux万物皆文件么，每个文件都有一个索引id（inode），硬连接就相当于是一个别名，如果你把它看成两个文件的话，他们的inode是一样的</li>
+<li>删除一个硬连接文件，不会影响其他文件，只有最后一个文件被删除了，该文件才会真的被释放</li>
+<li>不能对目录创建</li>
+</ul>
+<h3 id="软连接">软连接：</h3>
+<ul>
+<li>可以看成一个普通文件，但是它的内容是原文件的地址</li>
+<li>删除软连接对原文件没有影响，删除原文件软连接就成了死连接</li>
+<li>可以对目录或者文件创建</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[操作系统]]></title>
+        <id>https://chaosreigned.github.io/post/cao-zuo-xi-tong/</id>
+        <link href="https://chaosreigned.github.io/post/cao-zuo-xi-tong/">
+        </link>
+        <updated>2020-08-25T09:33:22.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="进程线程">进程&amp;线程</h2>
+<h3 id="进程">进程</h3>
+<p>操作系统执行程序的基本单元</p>
+<h3 id="线程">线程</h3>
+<p>是比进程更小的执行单元，一个进程可以产生多个线程，线程间可以贡献进程的堆空间和方法区，也有自己私有的程序计数器、虚拟机栈和本地方法栈，线程执行开销更小，但需要注意多线程之间的资源管理</p>
+<h3 id="进程状态">进程状态：</h3>
+<ul>
+<li>new</li>
+<li>ready</li>
+<li>running</li>
+<li>wating</li>
+<li>terminated</li>
+</ul>
+<h3 id="线程状态精简了ready-running-waiting增加了blocked-waiting-timed_waiting">线程状态：(精简了ready、running、waiting，增加了blocked、waiting、timed_waiting)</h3>
+<ul>
+<li>new</li>
+<li>runnable</li>
+<li>blocked：锁</li>
+<li>waiting：wait()</li>
+<li>timed_waiting: sleep()</li>
+<li>terminated</li>
+</ul>
+<h3 id="进程间通信">进程间通信：</h3>
+<ul>
+<li>管道(匿名/有名)</li>
+<li>信号</li>
+<li>信号量</li>
+<li>消息队列</li>
+<li>共享内存</li>
+<li>套接字</li>
+</ul>
+<h3 id="线程同步">线程同步：</h3>
+<ul>
+<li>互斥量：lock()</li>
+<li>信号量：semaphore</li>
+<li>事件：wait() notify()</li>
+</ul>
+<h3 id="进程线程调度算法">进程(线程)调度算法：</h3>
+<pre><code>1. 先到先服务
+2. 短时间优先
+3. 时间片轮转
+4. 优先级调度
+5. 多级调度
+</code></pre>
+<h2 id="内存">内存：</h2>
+<p>OS内存管理主要是：内存的分配与回收 &amp; 逻辑内存与物理内存的映射关系</p>
+<h3 id="内存管理机制">内存管理机制：</h3>
+<ul>
+<li>简单管理</li>
+<li>页式管理</li>
+<li>段式管理</li>
+<li>段页式管理：段、页都提高了内存的使用效率，减少内存碎片，页大小固定而段大小不固定，页是操作系统管理内存的一种方式，没有逻辑意义，而段有逻辑含义，每一段都是一个程序申请的内存空间，对用户更友好，段页式就结合了两者的优势</li>
+</ul>
+<h3 id="块表与多级页表">块表与多级页表：</h3>
+<ul>
+<li>分页管理为了拓展内存空间，引入了多级页表，将不常访问的页表降级存入磁盘中</li>
+<li>而多级页表是牺牲时间换空间，为了加快物理内存寻址速度，又引入了块表的概念，块表就相当于内存的cache</li>
+</ul>
+<h3 id="cpu寻址虚拟内存">CPU寻址（虚拟内存）：</h3>
+<ul>
+<li>避免程序直接访问物理内存，造成OS崩溃，或进程间相互影响</li>
+<li>增加内存空间</li>
+<li>使不相邻的物理空间在逻辑上相邻，增加内存使用率</li>
+</ul>
+<h3 id="局部性原理">局部性原理：</h3>
+<ul>
+<li>时间局部性：刚执行过的指令很大概率会再次执行</li>
+<li>空间局部性：刚访问过的内存空间，与其相邻的空间有很大概率会被访问</li>
+</ul>
+<h3 id="虚拟内存实现技术">虚拟内存实现技术：</h3>
+<ul>
+<li>请求分页</li>
+<li>请求分段</li>
+<li>请求段页</li>
+<li>与内存管理机制的区别是：是否将程序全部所需的全部地址空间都装入主存</li>
+</ul>
+<p>###（缺页中断）页面置换算法：</p>
+<ul>
+<li>FIFO：先进先出</li>
+<li>LRU：最近最久未使用</li>
+<li>LFU：最少使用</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MarkDown]]></title>
         <id>https://chaosreigned.github.io/post/markdown/</id>
@@ -212,159 +363,6 @@ socketTimeOut：请求获取数据的超时时间(即响应时间)，单位毫�
 </code></pre>
 <p>hash表中的位置：hashcode&amp;(length-1)		length为hash表容量</p>
 <p>位运算比取余运算快很多，但是由于位运算只计算最后几位，因此很容易冲突，所以需要对hashcode的高位和低位进行XOR（异或）操作，来降低冲突</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CRON]]></title>
-        <id>https://chaosreigned.github.io/post/cron/</id>
-        <link href="https://chaosreigned.github.io/post/cron/">
-        </link>
-        <updated>2020-08-25T03:29:28.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="cron是基于时间的作业调度系统">cron是基于时间的作业调度系统</h3>
-<table>
-<thead>
-<tr>
-<th>领域</th>
-<th>需要</th>
-<th>允许的值</th>
-<th>允许特殊字符</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>分钟</td>
-<td>是</td>
-<td>0-59</td>
-<td>* , -</td>
-<td></td>
-</tr>
-<tr>
-<td>小时</td>
-<td>是</td>
-<td>0-23</td>
-<td>* , -</td>
-<td></td>
-</tr>
-<tr>
-<td>一个月的一天</td>
-<td>是</td>
-<td>1-31</td>
-<td>* , - ? L W</td>
-<td>? L W 仅在某些实施中</td>
-</tr>
-<tr>
-<td>月</td>
-<td>是</td>
-<td>1-12或JAN-DEC</td>
-<td>* , -</td>
-<td></td>
-</tr>
-<tr>
-<td>星期几</td>
-<td>是</td>
-<td>0-6或SUN-SAT</td>
-<td>* , - ? L #</td>
-<td>? L # 仅在某些实施中</td>
-</tr>
-</tbody>
-</table>
-<p>jenkins中H表示随机</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Bash]]></title>
-        <id>https://chaosreigned.github.io/post/bash/</id>
-        <link href="https://chaosreigned.github.io/post/bash/">
-        </link>
-        <updated>2020-08-25T03:19:00.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="与-反引号">$( ) 与 ``(反引号)</h3>
-<p>在 bash shell 中，$( ) 和``都是用来做命令替换用(commandsubstitution)的<br>
-反引号适用性比较广，但是容易看错</p>
-<h3 id="">${ }</h3>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow></mrow><mi mathvariant="normal">用</mi><mi mathvariant="normal">于</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">量</mi><mi mathvariant="normal">替</mi><mi mathvariant="normal">换</mi><mi mathvariant="normal">，</mi></mrow><annotation encoding="application/x-tex">{ }用于变量替换，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord"></span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">于</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">量</span><span class="mord cjk_fallback">替</span><span class="mord cjk_fallback">换</span><span class="mord cjk_fallback">，</span></span></span></span>{ } 会比较精确的界定变量名称的范围。</p>
-<h3 id="与">$[] 与 $(())</h3>
-<p>都是进行数学运算的，支持+ - * / %，但是注意，bash只能作整数运算，对于浮点数是当作字符串处理的。</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$0</td>
-<td>当前脚本的文件名</td>
-</tr>
-<tr>
-<td>$n</td>
-<td>传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。</td>
-</tr>
-<tr>
-<td>$#</td>
-<td>传递给脚本或函数的参数个数。</td>
-</tr>
-<tr>
-<td>$*</td>
-<td>传递给脚本或函数的所有参数。</td>
-</tr>
-<tr>
-<td>$@</td>
-<td>传递给脚本或函数的所有参数。被双引号(&quot; &quot;)包含时，与 $* 稍有不同，下面将会讲到。</td>
-</tr>
-<tr>
-<td>$?</td>
-<td>上个命令的退出状态，或函数的返回值。</td>
-</tr>
-<tr>
-<td>$$</td>
-<td>当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[SSH passwordless & 'q' command]]></title>
-        <id>https://chaosreigned.github.io/post/ssh-passwordless-and-q-command/</id>
-        <link href="https://chaosreigned.github.io/post/ssh-passwordless-and-q-command/">
-        </link>
-        <updated>2020-08-25T03:10:19.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="setup-passwordless-ssh-and-q-command-and-create-user-in-the-list-of-nodes">Setup passwordless SSH and 'q' command and create user in the list of nodes.</h2>
-<h2 id="usage">Usage:</h2>
-<h3 id="1-create-node_list-file-with-the-list-of-node-ips-each-node-ip-takes-a-single-line">1. Create node_list file with the list of node IP's. Each node IP takes a single line.</h3>
-<pre><code>$ cat node_list 
-10.100.150.98
-10.100.150.99
-10.100.150.100
-10.100.150.101
-...
-</code></pre>
-<h3 id="2-run-ssh-keygen-t-rsa-with-all-default-options-to-generate-public-key-skip-this-step-if-you-have-already-done-it">2. Run ssh-keygen -t rsa with all default options to generate public key (skip this step if you have already done it).</h3>
-<h3 id="3-make-sure-sshpass-is-installed-on-all-nodes">3. Make sure sshpass is installed on all nodes.</h3>
-<h3 id="4-run-visudo-to-comment-the-line-of-defaults-requiretty-in-all-nodes">4. Run visudo to comment the line of &quot;Defaults    requiretty&quot; in all nodes.</h3>
-<h3 id="5-run-setup_allsh-to-setup-passwordless-ssh">5. Run setup_all.sh to setup passwordless SSH.</h3>
-<pre><code>$ setup_all.sh &lt;user&gt; &lt;password&gt;
-</code></pre>
-<h3 id="6-run-q-node_list-hostname-to-test-the-configuration-result-if-the-command-runs-smoothly-without-asking-password-in-any-node-then-you-are-good-to-go">6. Run 'q node_list hostname' to test the configuration result. If the command runs smoothly without asking password in any node, then you are good to go.</h3>
-<pre><code>$ q node_list hostname
-==== 10.100.150.98 ====
-vm-150-98
-
-==== 10.100.150.99 ====
-vm-150-99
-
-==== 10.100.150.100 ====
-vm-150-100
-
-==== 10.100.150.101 ====
-vm-150-101
-</code></pre>
-<h3 id="7-run-create_usersh-to-create-your-own-user-in-all-the-nodes">7. Run create_user.sh to create your own user in all the nodes.</h3>
-<pre><code>$ create_user.sh &lt;user&gt; &lt;password&gt; [non_sudoer|sudoer|sudoer_nopass]
-</code></pre>
-<h3 id="8-login-with-your-own-user-and-repeat-step-1-6-to-setup-passwordless-ssh-for-it-then-never-get-back-to-root-user">8. Login with your own user and repeat step 1 - 6 to setup passwordless SSH for it. Then never get back to root user.</h3>
 ]]></content>
     </entry>
 </feed>
