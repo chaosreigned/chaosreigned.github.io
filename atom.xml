@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chaosreigned.github.io</id>
     <title>Chaos</title>
-    <updated>2020-08-25T10:03:19.286Z</updated>
+    <updated>2020-08-26T08:50:37.474Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chaosreigned.github.io"/>
     <link rel="self" href="https://chaosreigned.github.io/atom.xml"/>
@@ -11,362 +11,176 @@
     <icon>https://chaosreigned.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Chaos</rights>
     <entry>
-        <title type="html"><![CDATA[SQL库函数]]></title>
-        <id>https://chaosreigned.github.io/post/sql-ku-han-shu/</id>
-        <link href="https://chaosreigned.github.io/post/sql-ku-han-shu/">
+        <title type="html"><![CDATA[牛顿迭代法计算开方]]></title>
+        <id>https://chaosreigned.github.io/post/niu-dun-die-dai-fa-ji-suan-kai-fang/</id>
+        <link href="https://chaosreigned.github.io/post/niu-dun-die-dai-fa-ji-suan-kai-fang/">
         </link>
-        <updated>2020-08-25T10:02:02.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="rank函数">rank函数</h3>
-<ol>
-<li>rank()       是跳跃拍学，两个第二名下来就是第四名</li>
-<li>dense_rank()   是连续排序，两个第二名仍然跟着第三名</li>
-</ol>
-<ul>
-<li>语法：<br>
-Select rank() over(order by xxx [desc]) from Table</li>
-</ul>
-<h3 id="round-函数">round 函数</h3>
-<p>用于把数值字段舍入为指定的小数位数</p>
-<ul>
-<li>语法：<br>
-SELECT ROUND(column_name,decimals) FROM table_name</li>
-</ul>
-<h3 id="datediffab">datediff(A,B)</h3>
-<p>日期A和B之间差的天数</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[总线删除设备]]></title>
-        <id>https://chaosreigned.github.io/post/zong-xian-shan-chu-she-bei/</id>
-        <link href="https://chaosreigned.github.io/post/zong-xian-shan-chu-she-bei/">
-        </link>
-        <updated>2020-08-25T09:50:22.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="scsi">scsi：</h3>
-<ul>
-<li>删除：
-<ol>
-<li>lsscsi | grep xxx</li>
-<li>echo 1 &gt; /sys/bus/scsi/devices/xxx/delete</li>
-</ol>
-</li>
-<li>恢复：
-<ol>
-<li>echo &quot;- - -&quot; &gt; /sys/class/scsi_host/hostx/scan  //x循环遍历0-n</li>
-</ol>
-</li>
-</ul>
-<h3 id="pci">pci：</h3>
-<ul>
-<li>删除：
-<ol>
-<li>lspci | grep xxx</li>
-<li>echo 1 &gt; /sys/bus/pci/devices/xxx/remove</li>
-</ol>
-</li>
-<li>恢复：
-<ol>
-<li>echo 1 &gt; /sys/bus/pci/rescan</li>
-</ol>
-</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Knuth 洗牌算法]]></title>
-        <id>https://chaosreigned.github.io/post/knuth-xi-pai-suan-fa/</id>
-        <link href="https://chaosreigned.github.io/post/knuth-xi-pai-suan-fa/">
-        </link>
-        <updated>2020-08-25T09:46:53.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>for (int i = n - 1; i &gt;= 0; i—) {
-    swap(arr[i], arr[new Random().nextInt(i + 1)]);
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[用户态与内核态]]></title>
-        <id>https://chaosreigned.github.io/post/yong-hu-tai-yu-nei-he-tai/</id>
-        <link href="https://chaosreigned.github.io/post/yong-hu-tai-yu-nei-he-tai/">
-        </link>
-        <updated>2020-08-25T09:45:11.000Z</updated>
-        <content type="html"><![CDATA[<p>Cpu指令中有一些指令是非常危险的，所以cpu会有特权级别，</p>
-<ul>
-<li>用户态为RING3，只能执行非特权的指令</li>
-<li>内核态为RING0，可以执行特权级别最高的指令</li>
-<li>每个进程都有自己的用户栈和内核栈，</li>
-<li>系统调用其实是一种软中断，会从用户态切换到内核态，首先会把用户栈的地址保存在内核栈中，然后设置堆栈指针寄存器的地址为内核栈的地址，退出的时候将之前保存的用户栈地址恢复到栈指针寄存器中，</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[java并发]]></title>
-        <id>https://chaosreigned.github.io/post/java-bing-fa/</id>
-        <link href="https://chaosreigned.github.io/post/java-bing-fa/">
-        </link>
-        <updated>2020-08-25T09:43:40.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="synchronized加锁非公平锁">synchronized：加锁（非公平锁）</h3>
-<p>代码块和方法都是给对象加锁，静态方法给类加锁</p>
-<ul>
-<li>代码块：每个对象头中都有一个monitor，synchronized通过转换成字节码后会有一个monitorenter和monitorexit，enter会将monitor的锁计数器+1，exit会-1</li>
-<li>方法：直接给方法加上ACC_SYNCHRONIZED标记</li>
-</ul>
-<h3 id="volatile保证可见性不保证原子性">Volatile：保证可见性不保证原子性</h3>
-<ul>
-<li>java内存模型每个线程都有自己的工作内存，所以有时候主存改变了，但线程的工作内存还没改变，就会造成问题，所以需要volatile定义，指定该变量是多变的，每次都要从主存读</li>
-</ul>
-<h3 id="threadlocal">ThreadLocal：</h3>
-<ul>
-<li>每个线程都有自己的本地变量，都存放在ThreadLocalMap中，避免线程安全问题，通过get()、set()来获取更改该线程的资源</li>
-<li>Thread中有ThreadLocalMap，每个ThreadLocal和它的变量都会存放在ThreadLocalMap中，而ThreadLocalMap是ThreadLocal的内部类</li>
-</ul>
-<h3 id="executor框架">Executor框架：</h3>
-<ul>
-<li>定义ThreadPoolExcutor线程池，然后主线程实现runnable或者callable接口，再通过线程池的excute或者submit方法执行</li>
-<li>ThreadPoolExcutor可以配置线程数量和队列数量，而FixedThreadPool、cachedThreadPool不能配置，容易OOM</li>
-</ul>
-<p>乐观锁：不加锁，每次写的时候check该值有没有被改变过，CAS，ABA问题<br>
-悲观锁：每次写之前都加锁，synchronized，AQS<br>
-AQS用CAS来update锁</p>
-<h3 id="concurrenthashmap-线程安全的具体实现方式">ConcurrentHashMap 线程安全的具体实现方式：</h3>
-<ul>
-<li>数据分段存储，每段一个锁，主要分为Segment和HashEntry，Segment是分段锁，每个Segment管理一个HashEntry</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[最长递增子序列]]></title>
-        <id>https://chaosreigned.github.io/post/zui-chang-di-zeng-zi-xu-lie/</id>
-        <link href="https://chaosreigned.github.io/post/zui-chang-di-zeng-zi-xu-lie/">
-        </link>
-        <updated>2020-08-25T09:40:01.000Z</updated>
-        <content type="html"><![CDATA[<p>给定数组arr，设长度为n，输出arr的最长递增子序列。（如果有多个答案，请输出其中字典序最小的）</p>
-<pre><code>public int[] LIS(int[] arr) {
-    // write code here
-    List&lt;Integer&gt;[] res = new ArrayList[arr.length];
-    int length = 0;
-    for (int i = 0; i &lt; arr.length; i++) {
-        int index = updateDP(res, arr[i], length);
-        length = Math.max(length, index + 1);
+        <updated>2020-08-26T08:37:58.000Z</updated>
+        <content type="html"><![CDATA[<p>x^2 = n;<br>
+f(x) = x^2 -n;<br>
+f(x)上每个点点切线斜率都为2x，因此f(x)的切线和x轴的交点为：x-f(x)/2x = (x+n/x)/2;<br>
+从x为n开始，求得f(x)上该点切线与x轴的交点，会慢慢逼近最终达到f(x)和x轴的交点，及所求的开方值<br>
+<img src="https://chaosreigned.github.io/post-images/1598431664578.jpg" alt="" loading="lazy"></p>
+<h3 id="代码">代码：</h3>
+<pre><code>int n;
+public double sqrts(double x){
+    double res = (x + n/ x) / 2;
+    if (res == x) {
+    return x;
+    } else {
+    return sqrts(res);
     }
-    int[] ret = new int[length];
-    for (int i = 0; i &lt; length; i++) {
-        ret[i] = res[length - 1].get(i);
-    }
-    return ret;
-}
+} </code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Linux /proc文件夹]]></title>
+        <id>https://chaosreigned.github.io/post/linux-proc-wen-jian-jia/</id>
+        <link href="https://chaosreigned.github.io/post/linux-proc-wen-jian-jia/">
+        </link>
+        <updated>2020-08-26T08:37:11.000Z</updated>
+        <content type="html"><![CDATA[<p>Proc是一个虚拟文件系统，在Linux系统中它被挂载于/proc目录之上。Proc有多个功能 ，这其中包括用户可以通过它访问内核信息或用于排错，这其中一个非常有 用的功能，也是Linux变得更加特别的功能就是以文本流的形式来访问进程信息。</p>
+<ul>
+<li>/proc/pid/cmdline 包含了用于开始进程的命令 ；</li>
+<li>/proc/pid/cwd包含了当前进程工作目录的一个链接 ；</li>
+<li>/proc/pid/environ 包含了可用进程环境变量的列表 ；</li>
+<li>/proc/pid/exe 包含了正在进程中运行的程序链接；</li>
+<li>/proc/pid/fd/ 这个目录包含了进程打开的每一个文件的链接；</li>
+<li>/proc/pid/mem 包含了进程在内存中的内容；</li>
+<li>/proc/pid/stat包含了进程的状态信息；</li>
+<li>/proc/pid/statm 包含了进程的内存使用信息。</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Drop cache]]></title>
+        <id>https://chaosreigned.github.io/post/drop-cache/</id>
+        <link href="https://chaosreigned.github.io/post/drop-cache/">
+        </link>
+        <updated>2020-08-26T08:36:46.000Z</updated>
+        <content type="html"><![CDATA[<p>echo 3 &gt; /proc/sys/vm/drop_caches</p>
+<p>查看free -h</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[快速创建大文件]]></title>
+        <id>https://chaosreigned.github.io/post/kuai-su-chuang-jian-da-wen-jian/</id>
+        <link href="https://chaosreigned.github.io/post/kuai-su-chuang-jian-da-wen-jian/">
+        </link>
+        <updated>2020-08-26T08:35:57.000Z</updated>
+        <content type="html"><![CDATA[<p>fallocate -l 10t 文件名</p>
+<p>fallocate命令可以为文件预分配物理空间。-l后接空间大小，默认单位为字节。也可后跟k、m、g、t、p、e来指定单位，分别代表KB、MB、GB、TB、PB、EB。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ArrayList]]></title>
+        <id>https://chaosreigned.github.io/post/arraylist/</id>
+        <link href="https://chaosreigned.github.io/post/arraylist/">
+        </link>
+        <updated>2020-08-26T08:35:05.000Z</updated>
+        <content type="html"><![CDATA[<p>空间复杂度：</p>
+<ul>
+<li>初始容量：10</li>
+<li>新容量=旧容量 * 3/2 + 1，每次增加50%左右</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Vim行内跳转]]></title>
+        <id>https://chaosreigned.github.io/post/vim-xing-nei-tiao-zhuan/</id>
+        <link href="https://chaosreigned.github.io/post/vim-xing-nei-tiao-zhuan/">
+        </link>
+        <updated>2020-08-26T08:34:25.000Z</updated>
+        <content type="html"><![CDATA[<p>h：往前一步<br>
+l：往后一步</p>
+<p>xxx+h：往前xxx步<br>
+xxx+l：往后xxx步</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[字符串补零]]></title>
+        <id>https://chaosreigned.github.io/post/zi-fu-chuan-bu-ling/</id>
+        <link href="https://chaosreigned.github.io/post/zi-fu-chuan-bu-ling/">
+        </link>
+        <updated>2020-08-26T08:33:05.000Z</updated>
+        <content type="html"><![CDATA[<p>String.format(&quot;%010d&quot;, 25);     //25为int型</p>
+<ul>
+<li>0代表前面要补的字符</li>
+<li>10代表字符串长度</li>
+<li>d表示参数为整数类型</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[并查集]]></title>
+        <id>https://chaosreigned.github.io/post/bing-cha-ji/</id>
+        <link href="https://chaosreigned.github.io/post/bing-cha-ji/">
+        </link>
+        <updated>2020-08-26T08:30:13.000Z</updated>
+        <content type="html"><![CDATA[<p>并查集是一种树型的数据结构，用于处理一些不交集（Disjoint Sets）的合并及查询问题。<br>
+有一个联合-查找算法（union-find algorithm）定义了两个用于此数据结构的操作：</p>
+<ul>
+<li>Find：确定元素属于哪一个子集。它可以被用来确定两个元素是否属于同一子集。</li>
+<li>Union：将两个子集合并成同一个集合。</li>
+</ul>
+<h3 id="简化实现">简化实现：</h3>
+<pre><code>public class UF {
+    private int[] id;
 
-private int updateDP(List&lt;Integer&gt;[] res, int val, int len) {
-    int l = 0, r = len - 1;
-    while (l &lt;= r) {
-        int mid = (l + r) / 2;
-        int midLast = res[mid].get(res[mid].size() - 1);
-        if (midLast == val) {
-            return mid;
-        } else if (midLast &gt; val) {
-            r = mid - 1;
-        } else {
-            l = mid + 1;
+    UF(int N) {
+        id = new int[N + 1];
+        for (int i = 0; i &lt;= N; i++) {
+            id[i] = i;
         }
     }
-    res[l] = l &gt; 0 ? new ArrayList&lt;&gt;(res[l - 1]) : new ArrayList&lt;&gt;();
-    res[l].add(val);
-    return l;
+
+    public void union(int a, int b) {
+        int aID = find(a);
+        int bID = find(b);
+        if (aID != bID) {
+            for (int i = 0; i &lt; id.length; i++) {
+                if (id[i] == aID) {
+                    id[i] = bID;
+                }
+            }
+        }
+    }
+
+    public int find(int n){
+        return id[n];
+    }
 }</code></pre>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[硬/软连接]]></title>
-        <id>https://chaosreigned.github.io/post/ying-ruan-lian-jie/</id>
-        <link href="https://chaosreigned.github.io/post/ying-ruan-lian-jie/">
+        <title type="html"><![CDATA[java位运算符]]></title>
+        <id>https://chaosreigned.github.io/post/java-wei-yun-suan-fu/</id>
+        <link href="https://chaosreigned.github.io/post/java-wei-yun-suan-fu/">
         </link>
-        <updated>2020-08-25T09:38:39.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="硬连接">硬连接：</h3>
-<ul>
-<li>linux万物皆文件么，每个文件都有一个索引id（inode），硬连接就相当于是一个别名，如果你把它看成两个文件的话，他们的inode是一样的</li>
-<li>删除一个硬连接文件，不会影响其他文件，只有最后一个文件被删除了，该文件才会真的被释放</li>
-<li>不能对目录创建</li>
-</ul>
-<h3 id="软连接">软连接：</h3>
-<ul>
-<li>可以看成一个普通文件，但是它的内容是原文件的地址</li>
-<li>删除软连接对原文件没有影响，删除原文件软连接就成了死连接</li>
-<li>可以对目录或者文件创建</li>
-</ul>
+        <updated>2020-08-26T08:28:12.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="移位">移位</h3>
+<p>&lt;&lt;      :     左移运算符，num &lt;&lt; 1,相当于num乘以2<br>
+&gt;&gt;      :     右移运算符，num &gt;&gt; 1,相当于num除以2<br>
+&gt;&gt;&gt;    :     无符号右移，符号位都以0补齐</p>
+<h3 id="位运算">位运算</h3>
+<p>位与：&amp;<br>
+位或：|<br>
+位异或：^</p>
+<p>x ^ 0s = x      x &amp; 0s = 0      x | 0s = x<br>
+x ^ 1s = ~x     x &amp; 1s = x      x | 1s = 1s<br>
+x ^ x = 0       x &amp; x = x       x | x = x</p>
+<p>x &amp; (-x) 是保留位中最右边 1</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[操作系统]]></title>
-        <id>https://chaosreigned.github.io/post/cao-zuo-xi-tong/</id>
-        <link href="https://chaosreigned.github.io/post/cao-zuo-xi-tong/">
+        <title type="html"><![CDATA[浮点数运算不准确]]></title>
+        <id>https://chaosreigned.github.io/post/fu-dian-shu-yun-suan-bu-zhun-que/</id>
+        <link href="https://chaosreigned.github.io/post/fu-dian-shu-yun-suan-bu-zhun-que/">
         </link>
-        <updated>2020-08-25T09:33:22.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="进程线程">进程&amp;线程</h2>
-<h3 id="进程">进程</h3>
-<p>操作系统执行程序的基本单元</p>
-<h3 id="线程">线程</h3>
-<p>是比进程更小的执行单元，一个进程可以产生多个线程，线程间可以贡献进程的堆空间和方法区，也有自己私有的程序计数器、虚拟机栈和本地方法栈，线程执行开销更小，但需要注意多线程之间的资源管理</p>
-<h3 id="进程状态">进程状态：</h3>
-<ul>
-<li>new</li>
-<li>ready</li>
-<li>running</li>
-<li>wating</li>
-<li>terminated</li>
-</ul>
-<h3 id="线程状态精简了ready-running-waiting增加了blocked-waiting-timed_waiting">线程状态：(精简了ready、running、waiting，增加了blocked、waiting、timed_waiting)</h3>
-<ul>
-<li>new</li>
-<li>runnable</li>
-<li>blocked：锁</li>
-<li>waiting：wait()</li>
-<li>timed_waiting: sleep()</li>
-<li>terminated</li>
-</ul>
-<h3 id="进程间通信">进程间通信：</h3>
-<ul>
-<li>管道(匿名/有名)</li>
-<li>信号</li>
-<li>信号量</li>
-<li>消息队列</li>
-<li>共享内存</li>
-<li>套接字</li>
-</ul>
-<h3 id="线程同步">线程同步：</h3>
-<ul>
-<li>互斥量：lock()</li>
-<li>信号量：semaphore</li>
-<li>事件：wait() notify()</li>
-</ul>
-<h3 id="进程线程调度算法">进程(线程)调度算法：</h3>
-<pre><code>1. 先到先服务
-2. 短时间优先
-3. 时间片轮转
-4. 优先级调度
-5. 多级调度
-</code></pre>
-<h2 id="内存">内存：</h2>
-<p>OS内存管理主要是：内存的分配与回收 &amp; 逻辑内存与物理内存的映射关系</p>
-<h3 id="内存管理机制">内存管理机制：</h3>
-<ul>
-<li>简单管理</li>
-<li>页式管理</li>
-<li>段式管理</li>
-<li>段页式管理：段、页都提高了内存的使用效率，减少内存碎片，页大小固定而段大小不固定，页是操作系统管理内存的一种方式，没有逻辑意义，而段有逻辑含义，每一段都是一个程序申请的内存空间，对用户更友好，段页式就结合了两者的优势</li>
-</ul>
-<h3 id="块表与多级页表">块表与多级页表：</h3>
-<ul>
-<li>分页管理为了拓展内存空间，引入了多级页表，将不常访问的页表降级存入磁盘中</li>
-<li>而多级页表是牺牲时间换空间，为了加快物理内存寻址速度，又引入了块表的概念，块表就相当于内存的cache</li>
-</ul>
-<h3 id="cpu寻址虚拟内存">CPU寻址（虚拟内存）：</h3>
-<ul>
-<li>避免程序直接访问物理内存，造成OS崩溃，或进程间相互影响</li>
-<li>增加内存空间</li>
-<li>使不相邻的物理空间在逻辑上相邻，增加内存使用率</li>
-</ul>
-<h3 id="局部性原理">局部性原理：</h3>
-<ul>
-<li>时间局部性：刚执行过的指令很大概率会再次执行</li>
-<li>空间局部性：刚访问过的内存空间，与其相邻的空间有很大概率会被访问</li>
-</ul>
-<h3 id="虚拟内存实现技术">虚拟内存实现技术：</h3>
-<ul>
-<li>请求分页</li>
-<li>请求分段</li>
-<li>请求段页</li>
-<li>与内存管理机制的区别是：是否将程序全部所需的全部地址空间都装入主存</li>
-</ul>
-<p>###（缺页中断）页面置换算法：</p>
-<ul>
-<li>FIFO：先进先出</li>
-<li>LRU：最近最久未使用</li>
-<li>LFU：最少使用</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MarkDown]]></title>
-        <id>https://chaosreigned.github.io/post/markdown/</id>
-        <link href="https://chaosreigned.github.io/post/markdown/">
-        </link>
-        <updated>2020-08-25T07:19:08.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="这是一级标题">这是一级标题</h1>
-<h2 id="这是二级标题">这是二级标题</h2>
-<h3 id="这是三级标题">这是三级标题</h3>
-<h4 id="这是四级标题">这是四级标题</h4>
-<h5 id="这是五级标题">这是五级标题</h5>
-<h6 id="这是六级标题">这是六级标题</h6>
-<p><strong>这是加粗的文字</strong><br>
-<em>这是倾斜的文字</em>`<br>
-<em><strong>这是斜体加粗的文字</strong></em><br>
-<s>这是加删除线的文字</s></p>
-<blockquote>
-<p>这是引用的内容</p>
-<blockquote>
-<p>这是引用的内容</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>这是引用的内容</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<ul>
-<li>列表内容</li>
-</ul>
-<ul>
-<li>列表内容</li>
-</ul>
-<ul>
-<li>列表内容</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[socket常见异常]]></title>
-        <id>https://chaosreigned.github.io/post/socket-chang-jian-yi-chang/</id>
-        <link href="https://chaosreigned.github.io/post/socket-chang-jian-yi-chang/">
-        </link>
-        <updated>2020-08-25T03:38:57.000Z</updated>
-        <content type="html"><![CDATA[<ol>
-<li>
-<p>java.net.BindException:Address already in use: JVM_Bind<br>
-该异常发生在服务器端进行new ServerSocket(port)（port是一个0，65536的整型值）操作时。异常的原因是以为与port一样的一个端口已经被启动，并进行监听。此时用netstat –an命令，可以看到一个Listending状态的端口。只需要找一个没有被占用的端口就能解决这个问题。</p>
-</li>
-<li>
-<p>java.net.ConnectException: Connection refused: connect<br>
-该异常发生在客户端进行new Socket(ip, port)操作时，该异常发生的原因是或者具有ip地址的机器不能找到（也就是说从当前机器不存在到指定ip路由），或者是该ip存在，但找不到指定的端口进行监听。出现该问题，首先检查客户端的ip和port是否写错了，如果正确则从客户端ping一下服务器看是否能ping通，如果能ping通（服务服务器端把ping禁掉则需要另外的办法），则看在服务器端的监听指定端口的程序是否启动，这个肯定能解决这个问题。</p>
-</li>
-<li>
-<p>java.net.SocketException: Socket is closed<br>
-该异常在客户端和服务器均可能发生。异常的原因是己方主动关闭了连接后（调用了Socket的close方法）再对网络连接进行读写操作。</p>
-</li>
-<li>
-<p>java.net.SocketException: Connection reset<br>
-该异常在客户端和服务器端均有可能发生，引起该异常的原因是一端退出，但退出时并未关闭该连接，另一端如果在从连接中读数据则抛出该异常（Connection reset）。简单的说就是在连接断开后的读和写操作引起的。</p>
-</li>
-<li>
-<p>java.net.SocketException:Connect reset by peer:Socket write error<br>
-该异常在客户端和服务器端均有可能发生，引起该异常的原因是如果一端的Socket被关闭（或主动关闭或者因为异常退出而引起的关闭），另一端仍发送数据，发送的第一个数据包引发该异常(Connect reset by peer)。</p>
-</li>
-<li>
-<p>java.net.SocketException: Broken pipe<br>
-该异常在客户端和服务器均有可能发生。在第5个异常的第一种情况中（也就是抛出SocketExcepton:Connect reset by peer:Socket write error后），如果再继续写数据则抛出该异常。<br>
-前两个异常的解决方法是首先确保程序退出前关闭所有的网络连接，其次是要检测对方的关闭连接操作，发现对方关闭连接后自己也要关闭该连接。</p>
-</li>
-</ol>
+        <updated>2020-08-26T08:26:27.000Z</updated>
+        <content type="html"><![CDATA[<p>3*0.1=0.30000000000000004</p>
+<p>原因：二进制浮点数精度不够，任一整数都能表示为若干2的次方之和，但小数无法表示为若干2的次方之和</p>
+<p>所以，浮点数计算判断要慎重</p>
 ]]></content>
     </entry>
 </feed>

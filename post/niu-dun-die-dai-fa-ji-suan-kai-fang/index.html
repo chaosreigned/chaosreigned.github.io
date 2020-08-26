@@ -1,0 +1,193 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>牛顿迭代法计算开方 | Chaos</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io/favicon.ico?v=1598431675433">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="牛顿迭代法计算开方 | Chaos - Atom Feed" href="https://chaosreigned.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="x^2 = n;
+f(x) = x^2 -n;
+f(x)上每个点点切线斜率都为2x，因此f(x)的切线和x轴的交点为：x-f(x)/2x = (x+n/x)/2;
+从x为n开始，求得f(x)上该点切线与x轴的交点，会慢慢逼近最终达到f(x)..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io">
+  <img class="avatar" src="https://chaosreigned.github.io/images/avatar.png?v=1598431675433" alt="">
+  </a>
+  <h1 class="site-title">
+    Chaos
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              牛顿迭代法计算开方
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-26
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>x^2 = n;<br>
+f(x) = x^2 -n;<br>
+f(x)上每个点点切线斜率都为2x，因此f(x)的切线和x轴的交点为：x-f(x)/2x = (x+n/x)/2;<br>
+从x为n开始，求得f(x)上该点切线与x轴的交点，会慢慢逼近最终达到f(x)和x轴的交点，及所求的开方值<br>
+<img src="https://chaosreigned.github.io/post-images/1598431664578.jpg" alt="" loading="lazy"></p>
+<h3 id="代码">代码：</h3>
+<pre><code>int n;
+public double sqrts(double x){
+    double res = (x + n/ x) / 2;
+    if (res == x) {
+    return x;
+    } else {
+    return sqrts(res);
+    }
+} </code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/linux-proc-wen-jian-jia/">
+              <h3 class="post-title">
+                Linux /proc文件夹
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
