@@ -1,0 +1,209 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>java并发 | Gridea</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io//favicon.ico?v=1624948086356">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="java并发 | Gridea - Atom Feed" href="https://chaosreigned.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="synchronized：加锁（非公平锁）
+代码块和方法都是给对象加锁，静态方法给类加锁
+
+代码块：每个对象头中都有一个monitor，synchronized通过转换成字节码后会有一个monitorenter和monitorexit，en..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io/">
+  <img class="avatar" src="https://chaosreigned.github.io//images/avatar.png?v=1624948086356" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              java并发
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-25
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="synchronized加锁非公平锁">synchronized：加锁（非公平锁）</h3>
+<p>代码块和方法都是给对象加锁，静态方法给类加锁</p>
+<ul>
+<li>代码块：每个对象头中都有一个monitor，synchronized通过转换成字节码后会有一个monitorenter和monitorexit，enter会将monitor的锁计数器+1，exit会-1</li>
+<li>方法：直接给方法加上ACC_SYNCHRONIZED标记</li>
+</ul>
+<h3 id="volatile保证可见性不保证原子性">Volatile：保证可见性不保证原子性</h3>
+<ul>
+<li>java内存模型每个线程都有自己的工作内存，所以有时候主存改变了，但线程的工作内存还没改变，就会造成问题，所以需要volatile定义，指定该变量是多变的，每次都要从主存读</li>
+</ul>
+<h3 id="threadlocal">ThreadLocal：</h3>
+<ul>
+<li>每个线程都有自己的本地变量，都存放在ThreadLocalMap中，避免线程安全问题，通过get()、set()来获取更改该线程的资源</li>
+<li>Thread中有ThreadLocalMap，每个ThreadLocal和它的变量都会存放在ThreadLocalMap中，而ThreadLocalMap是ThreadLocal的内部类</li>
+</ul>
+<h3 id="executor框架">Executor框架：</h3>
+<ul>
+<li>定义ThreadPoolExcutor线程池，然后主线程实现runnable或者callable接口，再通过线程池的excute或者submit方法执行</li>
+<li>ThreadPoolExcutor可以配置线程数量和队列数量，而FixedThreadPool、cachedThreadPool不能配置，容易OOM</li>
+</ul>
+<p>乐观锁：不加锁，每次写的时候check该值有没有被改变过，CAS，ABA问题<br>
+悲观锁：每次写之前都加锁，synchronized，AQS<br>
+AQS用CAS来update锁</p>
+<h3 id="concurrenthashmap-线程安全的具体实现方式">ConcurrentHashMap 线程安全的具体实现方式：</h3>
+<ul>
+<li>数据分段存储，每段一个锁，主要分为Segment和HashEntry，Segment是分段锁，每个Segment管理一个HashEntry</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#synchronized%E5%8A%A0%E9%94%81%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81">synchronized：加锁（非公平锁）</a></li>
+<li><a href="#volatile%E4%BF%9D%E8%AF%81%E5%8F%AF%E8%A7%81%E6%80%A7%E4%B8%8D%E4%BF%9D%E8%AF%81%E5%8E%9F%E5%AD%90%E6%80%A7">Volatile：保证可见性不保证原子性</a></li>
+<li><a href="#threadlocal">ThreadLocal：</a></li>
+<li><a href="#executor%E6%A1%86%E6%9E%B6">Executor框架：</a></li>
+<li><a href="#concurrenthashmap-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F">ConcurrentHashMap 线程安全的具体实现方式：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/zui-chang-di-zeng-zi-xu-lie/">
+              <h3 class="post-title">
+                最长递增子序列
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

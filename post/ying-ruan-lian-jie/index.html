@@ -1,0 +1,191 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>硬/软连接 | Gridea</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io//favicon.ico?v=1624948086356">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="硬/软连接 | Gridea - Atom Feed" href="https://chaosreigned.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="硬连接：
+
+linux万物皆文件么，每个文件都有一个索引id（inode），硬连接就相当于是一个别名，如果你把它看成两个文件的话，他们的inode是一样的
+删除一个硬连接文件，不会影响其他文件，只有最后一个文件被删除了，该文件才会真的被释放..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io/">
+  <img class="avatar" src="https://chaosreigned.github.io//images/avatar.png?v=1624948086356" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              硬/软连接
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-25
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="硬连接">硬连接：</h3>
+<ul>
+<li>linux万物皆文件么，每个文件都有一个索引id（inode），硬连接就相当于是一个别名，如果你把它看成两个文件的话，他们的inode是一样的</li>
+<li>删除一个硬连接文件，不会影响其他文件，只有最后一个文件被删除了，该文件才会真的被释放</li>
+<li>不能对目录创建</li>
+</ul>
+<h3 id="软连接">软连接：</h3>
+<ul>
+<li>可以看成一个普通文件，但是它的内容是原文件的地址</li>
+<li>删除软连接对原文件没有影响，删除原文件软连接就成了死连接</li>
+<li>可以对目录或者文件创建</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E7%A1%AC%E8%BF%9E%E6%8E%A5">硬连接：</a></li>
+<li><a href="#%E8%BD%AF%E8%BF%9E%E6%8E%A5">软连接：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/cao-zuo-xi-tong/">
+              <h3 class="post-title">
+                操作系统
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

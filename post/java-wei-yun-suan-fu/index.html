@@ -1,0 +1,191 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>java位运算符 | Gridea</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io//favicon.ico?v=1624948086356">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="java位运算符 | Gridea - Atom Feed" href="https://chaosreigned.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="移位
+&lt;&lt;      :     左移运算符，num &lt;&lt; 1,相当于num乘以2
+&gt;&gt;      :     右移运算符，num &gt;&gt; 1,相当于num除以2
+&gt;&gt;&gt;   ..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io/">
+  <img class="avatar" src="https://chaosreigned.github.io//images/avatar.png?v=1624948086356" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              java位运算符
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-26
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="移位">移位</h3>
+<p>&lt;&lt;      :     左移运算符，num &lt;&lt; 1,相当于num乘以2<br>
+&gt;&gt;      :     右移运算符，num &gt;&gt; 1,相当于num除以2<br>
+&gt;&gt;&gt;    :     无符号右移，符号位都以0补齐</p>
+<h3 id="位运算">位运算</h3>
+<p>位与：&amp;<br>
+位或：|<br>
+位异或：^</p>
+<p>x ^ 0s = x      x &amp; 0s = 0      x | 0s = x<br>
+x ^ 1s = ~x     x &amp; 1s = x      x | 1s = 1s<br>
+x ^ x = 0       x &amp; x = x       x | x = x</p>
+<p>x &amp; (-x) 是保留位中最右边 1</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E7%A7%BB%E4%BD%8D">移位</a></li>
+<li><a href="#%E4%BD%8D%E8%BF%90%E7%AE%97">位运算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/fu-dian-shu-yun-suan-bu-zhun-que/">
+              <h3 class="post-title">
+                浮点数运算不准确
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

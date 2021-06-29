@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>磁盘&amp;网卡流量 | Gridea</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io//favicon.ico?v=1624948086356">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="磁盘&amp;网卡流量 | Gridea - Atom Feed" href="https://chaosreigned.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="查看网卡流量
+sar –n DEV  1
+DEV显示网络接口信息
+另外，-n参数很有用，他有6个不同的开关：DEV | EDEV | NFS | NFSD | SOCK | ALL ，其代表的含义如下：
+
+DEV显示网络接口信息。
+EDEV..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io/">
+  <img class="avatar" src="https://chaosreigned.github.io//images/avatar.png?v=1624948086356" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              磁盘&amp;网卡流量
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-25
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="查看网卡流量">查看网卡流量</h3>
+<p>sar –n DEV  1</p>
+<p>DEV显示网络接口信息<br>
+另外，-n参数很有用，他有6个不同的开关：DEV | EDEV | NFS | NFSD | SOCK | ALL ，其代表的含义如下：</p>
+<ul>
+<li>DEV显示网络接口信息。</li>
+<li>EDEV显示关于网络错误的统计数据。</li>
+<li>NFS统计活动的NFS客户端的信息。</li>
+<li>NFSD统计NFS服务器的信息</li>
+<li>SOCK显示套接字信息</li>
+<li>ALL显示所有5个开关</li>
+</ul>
+<h3 id="查看磁盘io">查看磁盘io</h3>
+<p>iostat -mxt 1</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E5%8D%A1%E6%B5%81%E9%87%8F">查看网卡流量</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98io">查看磁盘io</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/sql-ku-han-shu/">
+              <h3 class="post-title">
+                SQL库函数
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://chaosreigned.github.io/</id>
+    <title>Gridea</title>
+    <updated>2021-06-29T07:54:12.171Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://chaosreigned.github.io/"/>
+    <link rel="self" href="https://chaosreigned.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://chaosreigned.github.io/images/avatar.png</logo>
+    <icon>https://chaosreigned.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[水塘抽样]]></title>
+        <id>https://chaosreigned.github.io/post/shui-tang-chou-yang/</id>
+        <link href="https://chaosreigned.github.io/post/shui-tang-chou-yang/">
+        </link>
+        <updated>2021-06-03T06:19:32.000Z</updated>
+        <content type="html"><![CDATA[<p>水塘抽样(Reservoir sampling)其目的在于从包含n个项目的集合S中选取k个样本，其中<strong>n为一很大或未知的数量</strong>，尤其适用于<strong>不能把所有n个项目都存放到内存</strong>的情况。</p>
+<p>伪代码：</p>
+<pre><code>從S中抽取首k項放入「水塘」中
+對於每一個S[j]項（j ≥ k）：
+隨機產生一個範圍從0到j的整數r
+若 r &lt; k 則把水塘中的第r項換成S[j]項
+</code></pre>
+<p>当k为1的时候：</p>
+<pre><code>public int pick(int[] nums) {
+    int res = 0;
+    for (int i = 1; i &lt;= n.length; i++) {
+        if (new Random().nextInt(i) == 0) {
+            res = i;
+        }
+    }
+    return res;
+}</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[快排&快选]]></title>
+        <id>https://chaosreigned.github.io/post/kuai-pai-andkuai-xuan/</id>
+        <link href="https://chaosreigned.github.io/post/kuai-pai-andkuai-xuan/">
+        </link>
+        <updated>2021-06-02T03:53:31.000Z</updated>
+        <content type="html"><![CDATA[<p>基础快排：</p>
+<pre><code>public void quickSort(int[] num, int left, int right) {
+        if (left &gt;= right) {
+            return;
+        }
+        int pivot = right;
+        int small = left, big = left;
+        while (small &lt; right) {
+            if (num[small] &gt;= num[pivot]) {
+                small++;
+            } else {
+                swap(num, small, big);
+                small++;
+                big++;
+            }
+        }
+        swap(num, pivot, big);
+        quickSort(num, left, big - 1);
+        quickSort(num, big + 1, right);
+}
+</code></pre>
+<p>优化-三数取中：</p>
+<pre><code>public void quickSort(int[] num, int left, int right) {
+    if (left &gt;= right) {
+        return;
+    }
+    //三数取中
+    if (right - left &gt; 1) {
+        int mid = left + (right - left) / 2;
+        if (num[left] &gt; num[mid]) {
+            swap(num, left, mid);
+        }
+        if (num[left] &gt; num[right]) {
+            swap(num, left, right);
+        }
+        if (num[mid] &gt; num[right]) {
+            swap(num, mid, right);
+        }
+        swap(num, mid, right - 1);
+    }
+
+    int pivot = right - 1;
+    int small = left + 1, big = left + 1;
+    while (small &lt; pivot) {
+        if (num[small] &gt;= num[pivot]) {
+            small++;
+        } else {
+            swap(num, small, big);
+            small++;
+            big++;
+        }
+    }
+    swap(num, pivot, big);
+    quickSort(num, left, big - 1);
+    quickSort(num, big + 1, right);
+}
+</code></pre>
+<p>快速选择：</p>
+<pre><code>public int quickSelect(int[] num, int left, int right, int k) {
+    //三数取中
+    reorderThree(num, left, right);
+
+    int pivot = right - 1;
+    int small = left + 1, big = left + 1;
+    while (small &lt; pivot) {
+        if (num[small] &gt;= num[pivot]) {
+            small++;
+        } else {
+            swap(num, small, big);
+            small++;
+            big++;
+        }
+    }
+    swap(num, pivot, big);
+    //第k大
+    if (num.length - big == k) {
+        return num[big];
+    }
+    if (num.length - big &gt; k) {
+        return quickSelect(num, big + 1, right, k);
+    }
+    return quickSelect(num, left, big - 1, k + big - num.length);
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[java Arrays.sort()]]></title>
+        <id>https://chaosreigned.github.io/post/java-arrayssort/</id>
+        <link href="https://chaosreigned.github.io/post/java-arrayssort/">
+        </link>
+        <updated>2021-05-24T03:43:53.000Z</updated>
+        <content type="html"><![CDATA[<p>java数组排序，针对基本类型，无法自定义comparator，只有包装类才可以自定义comparator。<br>
+int[]是基本类型int数组，int[][]是包装类型int[]数组.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[两个key（key-pair）的Map]]></title>
+        <id>https://chaosreigned.github.io/post/liang-ge-keykey-pairde-map/</id>
+        <link href="https://chaosreigned.github.io/post/liang-ge-keykey-pairde-map/">
+        </link>
+        <updated>2021-05-14T06:58:20.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="python">python：</h2>
+<pre><code>dict((x, y) : point)
+</code></pre>
+<h2 id="java">java：</h2>
+<ul>
+<li>
+<p>嵌套MAP</p>
+<pre><code>  Map&lt;Integer, Map&lt;Integer, V&gt;&gt; map = //...
+  // ...
+  map.get(2).get(5); 
+</code></pre>
+</li>
+<li>
+<p>pair key的包装类</p>
+<pre><code>  public class Key {
+
+      private final int x;
+      private final int y;
+
+      public Key(int x, int y) {
+          this.x = x;
+          this.y = y;
+      }
+
+      @Override
+      public boolean equals(Object o) {
+          if (this == o) return true;
+          if (!(o instanceof Key)) return false;
+          Key key = (Key) o;
+          return x == key.x &amp;&amp; y == key.y;
+      }
+
+      @Override
+      // 重写hashcode
+      public int hashCode() {
+          int result = x;
+          result = 31 * result + y;
+          return result;
+      }
+
+  }
+</code></pre>
+</li>
+<li>
+<p>google的hashBasedTable</p>
+<pre><code>  import com.google.common.collect.HashBasedTable;
+  import com.google.common.collect.Table;
+
+  // 创建
+  Table&lt;Long, Long, Point&gt; plane = HashBasedTable.create();
+
+  // 新增
+  plane.put(1L, 2L, pointA);
+  plane.put(1L, 3L, pointB);
+  plane.put(1L, 4L, pointC);
+
+  // 获取
+  Point pointA = plane.get(1L, 2L);
+  Point pointB = plane.get(1L, 2L);
+</code></pre>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[组合数]]></title>
+        <id>https://chaosreigned.github.io/post/zu-he-shu/</id>
+        <link href="https://chaosreigned.github.io/post/zu-he-shu/">
+        </link>
+        <updated>2021-05-14T06:54:12.000Z</updated>
+        <content type="html"><![CDATA[<p>公式法：<br>
+private int getCombination(int n, int k) {<br>
+int a = 1, b = 1;<br>
+if (k &gt; n / 2) {<br>
+k = n - k;<br>
+}<br>
+for (int i = 1; i &lt;= k; i++) {<br>
+a *= (n + 1 - i);<br>
+b *= i;<br>
+}<br>
+return a / b;<br>
+}</p>
+<p>递归法：<br>
+private int getCombination1(int n, int k) {<br>
+if (k == 0 || n == k) {<br>
+return 1;<br>
+}<br>
+return getCombination1(n - 1, k) + getCombination1(n - 1, k - 1)<br>
+}</p>
+<p>总结：单次求值公式法更快，如果是多次迭代求值的话，递归法+map速度更快</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[adb常用命令]]></title>
+        <id>https://chaosreigned.github.io/post/adb-chang-yong-ming-ling/</id>
+        <link href="https://chaosreigned.github.io/post/adb-chang-yong-ming-ling/">
+        </link>
+        <updated>2021-05-10T06:51:32.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>连接和断开设备
+<ol>
+<li>adb connect 10.90.136.179:15062 # 通过IP地址和端口号连接机器</li>
+<li>adb disconnect # 断开所有连接</li>
+<li>adb devices # 显示目前的连接状态</li>
+</ol>
+</li>
+<li>shell
+<ol>
+<li>adb shell # 进入机器自带的命令行</li>
+<li>adb shell pm list packages # 显示在机器上安装的所有软件</li>
+<li>adb shell pm list packages -f # 显示所有软件的安装位置</li>
+</ol>
+</li>
+<li>数据传输
+<ol>
+<li>adb pull /data/local/tmp/aweme_map.txt ~/bytedance # 拉取数据</li>
+<li>adb push awemelite.apk /sdcard/ # 往机器压入数据</li>
+<li>adb shell uiautomator dump /sdcard/ui.xml # 将当前屏幕上的控件树保存成xml文件</li>
+<li>adb pull /sdcard/ui.xml ./ # 将xml文件拉取到本地保存</li>
+</ol>
+</li>
+<li></li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[二分法陷阱]]></title>
+        <id>https://chaosreigned.github.io/post/er-fen-fa-xian-jing/</id>
+        <link href="https://chaosreigned.github.io/post/er-fen-fa-xian-jing/">
+        </link>
+        <updated>2021-02-10T06:28:01.000Z</updated>
+        <content type="html"><![CDATA[<p>在计算mid=(l+r)/2的时候，有可能l+r会超出int范围，导致无限循环<br>
+应该用l+(r-l)/2来计算！！！</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[python split过滤空格]]></title>
+        <id>https://chaosreigned.github.io/post/python-split-guo-lu-kong-ge/</id>
+        <link href="https://chaosreigned.github.io/post/python-split-guo-lu-kong-ge/">
+        </link>
+        <updated>2021-01-24T09:36:27.000Z</updated>
+        <content type="html"><![CDATA[<p>str.split(&quot; &quot;)，这样写无法过滤空格，例如&quot;abc   cde  aa&quot;.split(&quot; &quot;)结果输出['abc','','','cde','','aa']</p>
+<p>str.split()，默认就会按空格分割，👎会把结果中的空字符串删掉，例如&quot;abc   cde  aa&quot;.split()结果输出['abc','cde','aa']</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[360评估总结]]></title>
+        <id>https://chaosreigned.github.io/post/360-ping-gu-zong-jie/</id>
+        <link href="https://chaosreigned.github.io/post/360-ping-gu-zong-jie/">
+        </link>
+        <updated>2021-01-04T08:59:58.000Z</updated>
+        <content type="html"><![CDATA[<p>如果你有超过十个人要写评语</p>
+<ol>
+<li>快速把每个人想说的最重要的1-3个点写下来。</li>
+</ol>
+<p>比如，一起合作了项目A，业绩如何，ta的设计能力对最终结果有显著正向帮助。又比如，ta坦诚清晰，在某一个会议里，当着10多个人说出心里的顾虑，引起了大家的共鸣和跟进。</p>
+<ol start="2">
+<li>
+<p>如果连1-3个点都想不起来的同学，拒绝360邀请</p>
+</li>
+<li>
+<p>休息一下，再一鼓作气把所有人按照之前的点润色一下，写完</p>
+</li>
+<li>
+<p>有些仅仅是短期合作，比如几个礼拜的，几乎不可能留下坏印象，你的”值得改进”可能也不够靠谱，那“值得改进”也别太纠结，写个无吧</p>
+</li>
+</ol>
+<p>这样的好处是：有成就感，很快就能把所有人都大概写完，而且回头再写也很快，不会错过重要的点。就怕每一篇都很纠结，到最后几个人的时候，疲劳而且没时间了，草草收尾。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[测试case稳定性]]></title>
+        <id>https://chaosreigned.github.io/post/ce-shi-case-wen-ding-xing/</id>
+        <link href="https://chaosreigned.github.io/post/ce-shi-case-wen-ding-xing/">
+        </link>
+        <updated>2020-11-22T07:03:05.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="不稳定的危害">不稳定的危害</h3>
+<ul>
+<li>
+<p>不稳定破坏了测试的确定性<br>
+无法通过测试结果来判断被测对象是否有bug。当用例通过时，被测对象不一定没有bug，当用例失败时，被测对象不一定有bug。</p>
+</li>
+<li>
+<p>不稳定降低了测试、研发效率<br>
+不稳定问题出现的时候，我们会花费一定的时间人力去分析它，而后续的一系列动作都需要停下来等待此次人工介入的分析结果，一整套自动化流程变成了半自动化，降低了研发的效率。</p>
+</li>
+<li>
+<p>不稳定使得真正的bug逃逸<br>
+当不稳定问题已经成为常态，我们会疲于去分析时好时坏是否有问题，导致真正的bug未被发现。</p>
+</li>
+<li>
+<p>不稳定影响团队协作<br>
+对rd来说，“我代码没有任何改变，你的测试结果一会儿成功一会儿失败，是你的测试用例有问题”；而对qa来说，“我的测试代码跟之前一模一样，昨天是全部通过的，今天就不行了，是你的系统不稳定”。</p>
+</li>
+</ul>
+<h3 id="不稳定的诱因">不稳定的诱因</h3>
+<figure data-type="image" tabindex="1"><img src="https://chaosreigned.github.io//post-images/1606029262986.png" alt="" loading="lazy"></figure>
+<h3 id="不稳定的解决办法">不稳定的解决办法</h3>
+<ul>
+<li>隔离
+<ul>
+<li>根据历史执行数据，将不稳定case归类放入隔离区</li>
+<li>隔离区可以不参与持续集成，或者标定不同的ci level，其他稳定用例持续发挥作用</li>
+<li>标定不稳定case优先级，可以根据稳定失败率高低来排序</li>
+<li>隔离区到达一定数量必须要治理，不能丢在隔离区就不管了，可以从优先级高的case开始治理</li>
+</ul>
+</li>
+<li>划分治理<br>
+<img src="https://chaosreigned.github.io//post-images/1606030901956.png" alt="" loading="lazy"></li>
+<li>治理办法
+<ul>
+<li>异步问题
+<ul>
+<li>增加轮询机制（不要忘记停止条件，避免陷入死循环）。</li>
+<li>制定合适的wait time，确保该等待时间足以获得该异步操作返回结果，或者超过该等待时间即确认该一步操作时效性有问题。</li>
+</ul>
+</li>
+<li>并发问题
+<ul>
+<li>不共享资源，不同的用例之间尽量不共享资源，例如不同的用例用的是同一个user。</li>
+<li>分类并发，对于有共享关系的用例我们分成一个组，组内进行串行，而没有共享关系的组之间并发。</li>
+<li>改变断言，包容所有线程的有效结果。</li>
+</ul>
+</li>
+<li>测试依赖问题
+<ul>
+<li>多用tearup和teardown用例执行前后进行准备设置和恢复现场。确保case之间不相互影响。</li>
+<li>强行指定case顺序，我们通过depends等方法指定case之间的顺序。</li>
+<li>依赖关系用例合并，有强依赖关系的用例合并成一个用例执行。</li>
+</ul>
+</li>
+<li>随机问题
+<ul>
+<li>随机即全部，如果我们测试数据是通过随机的方式每次实时获取，那么我们就需要对全部的测试数据兼容，各种异常数据，边界case都需要整理兼顾。</li>
+<li>严选随机数据质量，如果你不想在代码中兼容异常边界的数据，那么就保证你的随机数不会取到异常的，缩小随机的查询范围，或者可以根据某些条件判断随机数质量不达标就再取一次。</li>
+</ul>
+</li>
+<li>网络问题
+<ul>
+<li>重试，增加对网络的容忍度</li>
+<li>适当加大超时时间</li>
+<li>mock，把需要通过网络请求第三方的数据通过mock方式变成本地数据，不再依赖网络。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="效率与稳定性的冲突取舍">效率与稳定性的冲突取舍</h3>
+<p>效率治理其实和稳定性治理是会存在一定的冲突的，有时候我们为了追求效率，往往会因此引发稳定性问题。那么当这两者需要做一个取舍的时候，稳定性是排在更重要的位置上的。我们可以牺牲效率来解决稳定性问题，但是不可以牺牲稳定性来解决效率问题。</p>
+]]></content>
+    </entry>
+</feed>

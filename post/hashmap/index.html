@@ -1,0 +1,187 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HashMap | Gridea</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io//favicon.ico?v=1624948086356">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="HashMap | Gridea - Atom Feed" href="https://chaosreigned.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="HashMap有两个参数影响其性能：初始容量和加载因子。
+
+HashMap默认初始容量是16，加载因子是0.75。
+容量是哈希表中桶(Entry数组)的数量，初始容量只是哈希表在创建时的容量。
+加载因子是哈希表在其容量自动增加之前可以达到多..." />
+    <meta name="keywords" content="java" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io/">
+  <img class="avatar" src="https://chaosreigned.github.io//images/avatar.png?v=1624948086356" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              HashMap
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-25
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+                <a href="https://chaosreigned.github.io/tag/aefAYeAGl_/" class="post-tag">
+                  # java
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>HashMap有两个参数影响其性能：初始容量和加载因子。</p>
+<ul>
+<li>HashMap默认初始容量是16，加载因子是0.75。</li>
+<li>容量是哈希表中桶(Entry数组)的数量，初始容量只是哈希表在创建时的容量。</li>
+<li>加载因子是哈希表在其容量自动增加之前可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，通过调用 rehash 方法将容量翻倍。</li>
+</ul>
+<hr>
+<p>hashcode：</p>
+<pre><code>static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+</code></pre>
+<p>hash表中的位置：hashcode&amp;(length-1)		length为hash表容量</p>
+<p>位运算比取余运算快很多，但是由于位运算只计算最后几位，因此很容易冲突，所以需要对hashcode的高位和低位进行XOR（异或）操作，来降低冲突</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/cron/">
+              <h3 class="post-title">
+                CRON
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,226 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bash | Gridea</title>
+<link rel="shortcut icon" href="https://chaosreigned.github.io//favicon.ico?v=1624948086356">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://chaosreigned.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Bash | Gridea - Atom Feed" href="https://chaosreigned.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="$( ) 与 ``(反引号)
+在 bash shell 中，$( ) 和``都是用来做命令替换用(commandsubstitution)的
+反引号适用性比较广，但是容易看错
+${ }
+用于变量替换，{ }用于变量替换，用于变量替换，{ }..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://chaosreigned.github.io/">
+  <img class="avatar" src="https://chaosreigned.github.io//images/avatar.png?v=1624948086356" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Bash
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-25
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="与-反引号">$( ) 与 ``(反引号)</h3>
+<p>在 bash shell 中，$( ) 和``都是用来做命令替换用(commandsubstitution)的<br>
+反引号适用性比较广，但是容易看错</p>
+<h3 id="">${ }</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow></mrow><mi mathvariant="normal">用</mi><mi mathvariant="normal">于</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">量</mi><mi mathvariant="normal">替</mi><mi mathvariant="normal">换</mi><mi mathvariant="normal">，</mi></mrow><annotation encoding="application/x-tex">{ }用于变量替换，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord"></span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">于</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">量</span><span class="mord cjk_fallback">替</span><span class="mord cjk_fallback">换</span><span class="mord cjk_fallback">，</span></span></span></span>{ } 会比较精确的界定变量名称的范围。</p>
+<h3 id="与">$[] 与 $(())</h3>
+<p>都是进行数学运算的，支持+ - * / %，但是注意，bash只能作整数运算，对于浮点数是当作字符串处理的。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$0</td>
+<td>当前脚本的文件名</td>
+</tr>
+<tr>
+<td>$n</td>
+<td>传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。</td>
+</tr>
+<tr>
+<td>$#</td>
+<td>传递给脚本或函数的参数个数。</td>
+</tr>
+<tr>
+<td>$*</td>
+<td>传递给脚本或函数的所有参数。</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>传递给脚本或函数的所有参数。被双引号(&quot; &quot;)包含时，与 $* 稍有不同，下面将会讲到。</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>上个命令的退出状态，或函数的返回值。</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。</td>
+</tr>
+</tbody>
+</table>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%8E-%E5%8F%8D%E5%BC%95%E5%8F%B7">$( ) 与 ``(反引号)</a></li>
+<li><a href="#">${ }</a></li>
+<li><a href="#%E4%B8%8E">$[] 与 $(())</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://chaosreigned.github.io/post/ssh-passwordless-and-q-command/">
+              <h3 class="post-title">
+                SSH passwordless &amp; &#39;q&#39; command
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://chaosreigned.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
