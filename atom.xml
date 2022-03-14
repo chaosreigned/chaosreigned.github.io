@@ -2,14 +2,87 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://chaosreigned.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-06-29T07:54:12.171Z</updated>
+    <updated>2022-03-14T08:14:52.133Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://chaosreigned.github.io/"/>
     <link rel="self" href="https://chaosreigned.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://chaosreigned.github.io/images/avatar.png</logo>
     <icon>https://chaosreigned.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Gridea</rights>
+    <rights>All rights reserved 2022, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Allure]]></title>
+        <id>https://chaosreigned.github.io/post/allure/</id>
+        <link href="https://chaosreigned.github.io/post/allure/">
+        </link>
+        <updated>2021-11-25T07:37:17.000Z</updated>
+        <content type="html"><![CDATA[<p>Allure 是一款轻量级、支持多语言的开源自动化测试报告生成框架，由Java语言开发，支持 pytest 等测试框架，并可以集成到 Jenkins。</p>
+<h3 id="allure安装">allure安装</h3>
+<pre><code>wget -P /tmp/ http://github.com/allure-framework/allure2/releases/download/2.16.1/allure-2.16.1.tgz
+tar -zvxf /tmp/allure-2.16.1.tgz -C /tmp/
+ln -s  /tmp/allure-2.16.1/bin/allure /usr/bin/allure
+</code></pre>
+<h3 id="allure-pytest安装">allure-pytest安装</h3>
+<pre><code>pip install allure-pytest
+</code></pre>
+<h3 id="生成allure报告">生成allure报告</h3>
+<pre><code>pytest [测试文件] -s -q --alluredir=path(报告存储路径)
+</code></pre>
+<h3 id="查看在线报告">查看在线报告</h3>
+<pre><code>allure serve path
+</code></pre>
+<h3 id="生成查看离线报告">生成&amp;查看离线报告</h3>
+<pre><code>allure generate path -o 离线path --clean (覆盖路径加--clean)
+allure open -h 127.0.0.1 -p 8883  离线path
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[寻找字典序第k小的数]]></title>
+        <id>https://chaosreigned.github.io/post/xun-zhao-zi-dian-xu-di-k-xiao-de-shu/</id>
+        <link href="https://chaosreigned.github.io/post/xun-zhao-zi-dian-xu-di-k-xiao-de-shu/">
+        </link>
+        <updated>2021-08-25T08:41:38.000Z</updated>
+        <content type="html"><![CDATA[<p>给定整数 n 和 k，找到 1 到 n 中字典序第 k 小的数字。<br>
+注意：1 ≤ k ≤ n ≤ 10^9</p>
+<pre><code>public int getKthNumber(int n, int k){
+    int cur = 1;
+    k--;
+    while(k&gt;0){
+        int step = 0;
+        long start = cur, end = cur+1;
+        while(start&lt;=n){
+            step+= Math.min(n+1,end) - start;
+            start*=10;
+            end*=10;
+        }
+        if(k&gt;=step){
+            cur++;
+            k-=step;
+        }else{
+            cur*=10;
+            k--;
+        }
+    }
+    return cur;
+}</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[鞋带公式]]></title>
+        <id>https://chaosreigned.github.io/post/xie-dai-gong-shi/</id>
+        <link href="https://chaosreigned.github.io/post/xie-dai-gong-shi/">
+        </link>
+        <updated>2021-07-29T13:06:55.000Z</updated>
+        <content type="html"><![CDATA[<p>计算多边形面积<br>
+<img src="https://chaosreigned.github.io//post-images/1627564052326.jpeg" alt="" loading="lazy"></p>
+<p>对于三角形来说：</p>
+<pre><code>public double area(int[] A, int[] B, int[] C) {
+    return 0.5 * Math.abs(A[0]*B[1] + B[0]*C[1] + C[0]*A[1]
+            -A[1]*B[0] - B[1]*C[0] - C[1]*A[0]);
+}</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[水塘抽样]]></title>
         <id>https://chaosreigned.github.io/post/shui-tang-chou-yang/</id>
@@ -26,7 +99,7 @@
 <p>当k为1的时候：</p>
 <pre><code>public int pick(int[] nums) {
     int res = 0;
-    for (int i = 1; i &lt;= n.length; i++) {
+    for (int i = 1; i &lt;= nums.length; i++) {
         if (new Random().nextInt(i) == 0) {
             res = i;
         }
@@ -264,7 +337,11 @@ return getCombination1(n - 1, k) + getCombination1(n - 1, k - 1)<br>
 <li>adb pull /sdcard/ui.xml ./ # 将xml文件拉取到本地保存</li>
 </ol>
 </li>
-<li></li>
+<li>安装
+<ol>
+<li>adb install /path/to/repacked/apk</li>
+</ol>
+</li>
 </ol>
 ]]></content>
     </entry>
@@ -276,122 +353,6 @@ return getCombination1(n - 1, k) + getCombination1(n - 1, k - 1)<br>
         <updated>2021-02-10T06:28:01.000Z</updated>
         <content type="html"><![CDATA[<p>在计算mid=(l+r)/2的时候，有可能l+r会超出int范围，导致无限循环<br>
 应该用l+(r-l)/2来计算！！！</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[python split过滤空格]]></title>
-        <id>https://chaosreigned.github.io/post/python-split-guo-lu-kong-ge/</id>
-        <link href="https://chaosreigned.github.io/post/python-split-guo-lu-kong-ge/">
-        </link>
-        <updated>2021-01-24T09:36:27.000Z</updated>
-        <content type="html"><![CDATA[<p>str.split(&quot; &quot;)，这样写无法过滤空格，例如&quot;abc   cde  aa&quot;.split(&quot; &quot;)结果输出['abc','','','cde','','aa']</p>
-<p>str.split()，默认就会按空格分割，👎会把结果中的空字符串删掉，例如&quot;abc   cde  aa&quot;.split()结果输出['abc','cde','aa']</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[360评估总结]]></title>
-        <id>https://chaosreigned.github.io/post/360-ping-gu-zong-jie/</id>
-        <link href="https://chaosreigned.github.io/post/360-ping-gu-zong-jie/">
-        </link>
-        <updated>2021-01-04T08:59:58.000Z</updated>
-        <content type="html"><![CDATA[<p>如果你有超过十个人要写评语</p>
-<ol>
-<li>快速把每个人想说的最重要的1-3个点写下来。</li>
-</ol>
-<p>比如，一起合作了项目A，业绩如何，ta的设计能力对最终结果有显著正向帮助。又比如，ta坦诚清晰，在某一个会议里，当着10多个人说出心里的顾虑，引起了大家的共鸣和跟进。</p>
-<ol start="2">
-<li>
-<p>如果连1-3个点都想不起来的同学，拒绝360邀请</p>
-</li>
-<li>
-<p>休息一下，再一鼓作气把所有人按照之前的点润色一下，写完</p>
-</li>
-<li>
-<p>有些仅仅是短期合作，比如几个礼拜的，几乎不可能留下坏印象，你的”值得改进”可能也不够靠谱，那“值得改进”也别太纠结，写个无吧</p>
-</li>
-</ol>
-<p>这样的好处是：有成就感，很快就能把所有人都大概写完，而且回头再写也很快，不会错过重要的点。就怕每一篇都很纠结，到最后几个人的时候，疲劳而且没时间了，草草收尾。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[测试case稳定性]]></title>
-        <id>https://chaosreigned.github.io/post/ce-shi-case-wen-ding-xing/</id>
-        <link href="https://chaosreigned.github.io/post/ce-shi-case-wen-ding-xing/">
-        </link>
-        <updated>2020-11-22T07:03:05.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="不稳定的危害">不稳定的危害</h3>
-<ul>
-<li>
-<p>不稳定破坏了测试的确定性<br>
-无法通过测试结果来判断被测对象是否有bug。当用例通过时，被测对象不一定没有bug，当用例失败时，被测对象不一定有bug。</p>
-</li>
-<li>
-<p>不稳定降低了测试、研发效率<br>
-不稳定问题出现的时候，我们会花费一定的时间人力去分析它，而后续的一系列动作都需要停下来等待此次人工介入的分析结果，一整套自动化流程变成了半自动化，降低了研发的效率。</p>
-</li>
-<li>
-<p>不稳定使得真正的bug逃逸<br>
-当不稳定问题已经成为常态，我们会疲于去分析时好时坏是否有问题，导致真正的bug未被发现。</p>
-</li>
-<li>
-<p>不稳定影响团队协作<br>
-对rd来说，“我代码没有任何改变，你的测试结果一会儿成功一会儿失败，是你的测试用例有问题”；而对qa来说，“我的测试代码跟之前一模一样，昨天是全部通过的，今天就不行了，是你的系统不稳定”。</p>
-</li>
-</ul>
-<h3 id="不稳定的诱因">不稳定的诱因</h3>
-<figure data-type="image" tabindex="1"><img src="https://chaosreigned.github.io//post-images/1606029262986.png" alt="" loading="lazy"></figure>
-<h3 id="不稳定的解决办法">不稳定的解决办法</h3>
-<ul>
-<li>隔离
-<ul>
-<li>根据历史执行数据，将不稳定case归类放入隔离区</li>
-<li>隔离区可以不参与持续集成，或者标定不同的ci level，其他稳定用例持续发挥作用</li>
-<li>标定不稳定case优先级，可以根据稳定失败率高低来排序</li>
-<li>隔离区到达一定数量必须要治理，不能丢在隔离区就不管了，可以从优先级高的case开始治理</li>
-</ul>
-</li>
-<li>划分治理<br>
-<img src="https://chaosreigned.github.io//post-images/1606030901956.png" alt="" loading="lazy"></li>
-<li>治理办法
-<ul>
-<li>异步问题
-<ul>
-<li>增加轮询机制（不要忘记停止条件，避免陷入死循环）。</li>
-<li>制定合适的wait time，确保该等待时间足以获得该异步操作返回结果，或者超过该等待时间即确认该一步操作时效性有问题。</li>
-</ul>
-</li>
-<li>并发问题
-<ul>
-<li>不共享资源，不同的用例之间尽量不共享资源，例如不同的用例用的是同一个user。</li>
-<li>分类并发，对于有共享关系的用例我们分成一个组，组内进行串行，而没有共享关系的组之间并发。</li>
-<li>改变断言，包容所有线程的有效结果。</li>
-</ul>
-</li>
-<li>测试依赖问题
-<ul>
-<li>多用tearup和teardown用例执行前后进行准备设置和恢复现场。确保case之间不相互影响。</li>
-<li>强行指定case顺序，我们通过depends等方法指定case之间的顺序。</li>
-<li>依赖关系用例合并，有强依赖关系的用例合并成一个用例执行。</li>
-</ul>
-</li>
-<li>随机问题
-<ul>
-<li>随机即全部，如果我们测试数据是通过随机的方式每次实时获取，那么我们就需要对全部的测试数据兼容，各种异常数据，边界case都需要整理兼顾。</li>
-<li>严选随机数据质量，如果你不想在代码中兼容异常边界的数据，那么就保证你的随机数不会取到异常的，缩小随机的查询范围，或者可以根据某些条件判断随机数质量不达标就再取一次。</li>
-</ul>
-</li>
-<li>网络问题
-<ul>
-<li>重试，增加对网络的容忍度</li>
-<li>适当加大超时时间</li>
-<li>mock，把需要通过网络请求第三方的数据通过mock方式变成本地数据，不再依赖网络。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="效率与稳定性的冲突取舍">效率与稳定性的冲突取舍</h3>
-<p>效率治理其实和稳定性治理是会存在一定的冲突的，有时候我们为了追求效率，往往会因此引发稳定性问题。那么当这两者需要做一个取舍的时候，稳定性是排在更重要的位置上的。我们可以牺牲效率来解决稳定性问题，但是不可以牺牲稳定性来解决效率问题。</p>
 ]]></content>
     </entry>
 </feed>
